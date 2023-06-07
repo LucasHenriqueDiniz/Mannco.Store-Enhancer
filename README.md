@@ -1,4 +1,4 @@
-# "Mannco Store Navigation Extension"
+# Mannco Store Navigation Extension
 
 This project is a browser extension designed to enhance navigation on the Mannco Store website. It builds upon previously created Tampermonkey scripts, organizing them into a React-based extension using Manifest V3.
 
@@ -21,7 +21,9 @@ fix(public): Resolved the issue caused by your intriguing spaghetti code.
 
 feat(src): Added a magical button that summons ads from every nook and cranny, paving our path to unimaginable riches
 
-## "How to Test the Extension Locally"
+# FAQ:
+
+## How to Test the Extension Locally
 
 ### To test the extension locally, follow these steps:
 - Download the repository.
