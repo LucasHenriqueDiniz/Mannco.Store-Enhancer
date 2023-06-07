@@ -18,6 +18,7 @@ import {
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import { Layout, Menu, theme, Button } from 'antd';
 import React, { useState } from 'react';
+import './App.css';
 
 import TutorialSettings from './pages/settingsTutorial.tsx'
 import ItemPageSettings from './pages/settingsItemPage.tsx'
