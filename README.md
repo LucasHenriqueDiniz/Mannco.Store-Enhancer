@@ -6,6 +6,10 @@ Extension dowload link: ** 🐸 TO DO 🐇 **
 
 
 ## Help and Contribution Guidelines:
+### What to do?
+[Check out this link](https://github.com/users/LucasHenriqueDiniz/projects/2) if you're feeling lost but still want to lend a hand. You'll find a list of TODOs, work in progress, and issues waiting to be tackled.
+
+### Commits,pulls,etc
 
 To ensure consistent formatting, please follow the example below for your requests and commits:
 
