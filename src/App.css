@@ -1,0 +1,118 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial,sans-serif;
+}
+
+.ant-divider {
+  border-color: white!important;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar:horizontal {
+  width: 0px;
+  background-color: rgba(0, 0, 0, 0)
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: gray;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.imgsHolder {
+  display: flex;
+  justify-content: center;
+
+}
+
+.vertical-logo {
+  max-width: 100%;
+  height: 65px;
+  overflow: hidden;
+}
+
+.alignSelf-center {
+  align-self: center;
+}
+
+.borderRadius1 {
+  border-radius: 1rem;
+}
+
+.holdSidebar {
+  min-width: 64px;
+  display: flex;
+  justify-content: center;
+}
+
+.backgroundClass {
+  height: 100%;
+  min-height: calc(100vh - 64px);
+  background-image: url('https://next.backpack.tf/img/440/wallpapers/skibuster.jpg');
+  background-color: rgb(7, 9, 8);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.holdMenu {
+  width: calc(100vw - 128px );
+  display: flex;
+  justify-content: center;
+}
+
+.fullScreen:hover,
+.holdSidebar:hover {
+  background-color: #566b89;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ant-menu-item-selected {
+  background-color: #566b89!important;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+}
+
+
+.vertical-logo main {
+  transition: 0.25s ease;
+}
+
+.vertical-logo main:hover {
+  transform: scale(1.1);
+}
+
+.primary-color {
+  /* Selected, etc*/
+  background-color: #1b2329!important;
+  }
+
+.secondary-color {
+  /* Header, Sidebar*/
+  background-color: #273241!important;
+}
+
+.tertiary-color {
+  /* conteiner */
+  background-color: rgb(27 35 41)!important;
+}
+
+@media (min-width: 1920px) {
+  .container {
+    min-width: 1500px;
+  }
+}
+
+@media (max-width: 1919px) {
+  .container {
+    min-width: 95%;
+  }
+}
