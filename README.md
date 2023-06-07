@@ -4,7 +4,7 @@ This project is a browser extension designed to enhance navigation on the Mannco
 
 Extension dowload link: ** 🐸 TO DO 🐇 **
 
-![image](https://github.com/LucasHenriqueDiniz/Mannco.Store-Enhancer/assets/63087780/d34b1551-f488-4b10-83ec-8ee1ff61e6db)
+![image](https://github.com/LucasHenriqueDiniz/Mannco.Store-Enhancer/assets/63087780/7e0bd4ec-6021-4ddd-84f1-3c2895c39aa6)
 
 ## Help and Contribution Guidelines:
 ### What to do?
