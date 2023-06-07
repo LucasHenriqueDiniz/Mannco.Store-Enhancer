@@ -29,6 +29,6 @@ feat(src): Added a magical button that summons ads from every nook and cranny, p
 - Download the repository.
 - Navigate to the repository's location using the command line (terminal).
 - Run : **npm run build**.
-- Open the browser's extensions page and select "Load Extension Without Compatibility."
+- Open the browser's extensions page and select "Load Extension Without Compression"
 - Choose the "build" folder from the repository.
 - Done.
