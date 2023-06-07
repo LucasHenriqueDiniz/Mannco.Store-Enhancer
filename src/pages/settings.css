@@ -1,0 +1,182 @@
+.configuration-item {
+    display: flex;
+    flex-direction: row;
+    margin: 0px 3rem;
+    justify-content: space-between;
+    line-height: 2.5rem;
+    font-weight: 700;
+    font-size: 1rem;
+    align-items: center;
+    text-align: center;
+    text-rendering: optimizelegibility;  
+    color: white;
+  }
+
+  .title {
+    color: #566b89;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+.semi-title {
+  color: #566b89;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+ .text-box-func {
+  max-width: 90px;
+ }
+ .switch-func {
+  background: #566b89;
+ }
+
+ .scroll-to-top-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgb(50, 51, 81);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.ant-divider {
+  border-color: white!important;
+}
+
+.scroll-to-top-button.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scroll-to-top-button.hover {
+  background-color: rgb(90, 209, 232);
+  color: black;
+  border-top-style: outset;
+  border-top-color: rgba(255, 255, 255, 0.3);
+  border-top-width: medium;
+  border-bottom-style: outset;
+  border-bottom-color: rgba(0, 0, 0, 0.5);
+  border-bottom-width: medium;
+  box-shadow: 4px 4px 10px rgba(255, 255, 255, 0.3);
+  transform: translateY(-22%);
+}
+
+.text-faq {
+  padding: 7px;
+}
+
+.text-faq-row {
+  margin-bottom: 10px;
+}
+
+.text-faq-question {
+  font-weight: bold;
+}
+
+.text-faq-answer {
+  font-weight: bold;
+}
+
+.text-faq-separator {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+/* UPDATE LOGS */
+
+.update-type-text {
+  line-height: 25px;
+}
+
+.version-text {
+  font-size: 1.25rem;
+}
+
+.note {
+  margin-bottom: 20px;
+}
+
+.cnt {
+  margin-left: 20px;
+  line-height: 1rem;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #fff;
+}
+
+/*BOOKSMARK PAGE*/
+.content {
+  background-color: rgb(27, 35, 41);
+}
+
+.categoriesFilter {
+  background-color: #273241 !important;
+}
+
+.exportButton {
+  background-color: #273241 !important;
+}
+
+.importButton {
+  background-color: #273241 !important;
+}
+
+.bookmarkHeader {
+  background-color: #273241 !important;
+}
+
+.name {
+  background-color: #273241 !important;
+}
+
+.volume {
+  background-color: #273241 !important;
+}
+
+.price {
+  background-color: #273241 !important;
+}
+
+.action {
+  background-color: #273241 !important;
+}
+
+.bookmarkBody {
+  background-color: rgb(27, 35, 41) !important;
+}
+
+.importInput {
+  background-color: rgb(27, 35, 41) !important;
+}
+
+.primary-color {
+  background-color: #1b2329 !important;
+}
+
+.secondary-color {
+  background-color: #273241 !important;
+}
+
+.tertiary-color {
+  background-color: rgb(27, 35, 41) !important;
+}

@@ -1,0 +1,75 @@
+
+TO DO:
+
+- Terminar o inventory Enhancer
+- - ver se consegue usar biblioteca para marcar items pintados
+- - quick sell auto
+- - melhorar sistema de navgaçao no quicksell
+- - auto withdrawn metal
+- - auto withdrawn painted
+- - contador de quantos items estao mispriced
+- - deixar os items mais parecidos com BP.TF
+- - LATER:
+- - - adicionar atributos para os items e permitir usar o serach por meio destes atributos
+- - - mostrar buyOrder value e dai profit usando as buyOrders armazenadas
+- - - CASO PASSE DE UMA SEMANA DESDE A ULTIMA ATT DE BUYORDER DAR AVISO - CONFIG MAIN
+
+- concertar o profile enhancer para o novo sistema de configs e adicionar world MAIN
+- - botoes estao mostrando o evento mas nao executando
+- - adicionar botao para esconder valores
+- - Adicionar funçao para salvar buyOrders em excel
+- - Adicionar botao para armazenar as buyOrders
+
+- criar um novo react-project e colocar tudo daqui dentro dele porque este esta cheio de merda inutil !IMPORTANT!
+
+- Criar bookmarks para analisar varios items simultaneamente, salvando os valores semrpe que abrir a extençao (fazer um fetch quando entrar no site prob usando a API call do mannco.store)
+
+- Adicionar botao para esconder/expandir Item List na Item Page
+
+- finalizar restos na pagina de configuraçao
+- - adicionar botao em color picker e input box para salvar e nao ficar atualizando a cada input (onCHange show button e dai click button function de save)
+
+ISSUES:
+
+- Color Picker nao esta salvando a cor e usando no bgc e bgborder
+
+- clipboard icon no itemName esta errado o tempo todo.
+
+- profile enhancer botao esta sem texto content
+
+- webscrapper nao funciona por causa de no cors
+- - adicionar em host permission falavam que arrumava porem n vi diferenteça
+- - na pior das hipoteses deixa como tampermonkey exnteison msm e add o link na extenscao
+
+- red-txt em itemPage nao esta sendo aplicado corretamente, esta sempre saindo green-txt
+
+- Giveways constantemente da problema, nao sei porque. :> provavelmente falta de async em tudo.
+- - primeiro e ultimo botao nao ficam com border radius sempre.
+- - botoes as vezes sao craidos e somem
+- - parece que esta executando tudo bagunçado funcoes as prob arrumam
+
+
+runbuild errros:
+
+[eslint]
+src\pages\settingsEnhancer.tsx  --- Later just remove it 
+  Line 4:10:  'Divider' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 6:10:  'CreateSwitch' is defined but never used       @typescript-eslint/no-unused-vars
+  Line 6:24:  'CreateColorPicker' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 6:59:  'CreateValueBox' is defined but never used     @typescript-eslint/no-unused-vars
+  Line 6:75:  'CreateTextBox' is defined but never used      @typescript-eslint/no-unused-vars
+
+src\pages\settingsGiveways.tsx --- Later just remove it 
+  Line 4:10:  'Divider' is defined but never used  @typescript-eslint/no-unused-vars
+
+src\pages\settingsInventory.tsx --- Later just remove it 
+  Line 4:10:  'Divider' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 6:24:  'CreateColorPicker' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 6:43:  'CreateSelector' is defined but never used     @typescript-eslint/no-unused-vars
+  Line 6:59:  'CreateValueBox' is defined but never used     @typescript-eslint/no-unused-vars
+  Line 6:75:  'CreateTextBox' is defined but never used      @typescript-eslint/no-unused-vars
+
+src\pages\settingsTutorial.tsx - - - Fix! 
+  Line 43:22:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+  Line 54:28:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid
+  Line 61:19:  The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a button and change it with appropriate styles. Learn more: https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/blob/HEAD/docs/rules/anchor-is-valid.md  jsx-a11y/anchor-is-valid

@@ -1,25 +1,24 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
+  "name": "Mannco.Store Enhancer",
+  "version": "0.1",
+  "manifest_version": 3,
+  "description": "Mannco Store Enhancer is a browser extension that enhances the Mannco Store website with a range of features to make your shopping experience more efficient and streamlined.",
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Mannco.Store Enhancer"
+  },
+  "options_page": "index.html",
+  "permissions": [
+      "scripting",
+      "storage",
+      "webNavigation",
+      "tabs",
+      "clipboardWrite"
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "host_permissions": [
+    "*://mannco.store/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }
