@@ -1,12 +1,13 @@
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: Arial,sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .ant-divider {
-  border-color: white!important;
+  border-color: white !important;
 }
 
 body::-webkit-scrollbar {
@@ -16,7 +17,7 @@ body::-webkit-scrollbar {
 
 ::-webkit-scrollbar:horizontal {
   width: 0px;
-  background-color: rgba(0, 0, 0, 0)
+  background-color: rgba(0, 0, 0, 0);
 }
 
 body::-webkit-scrollbar-thumb {
@@ -30,7 +31,6 @@ body::-webkit-scrollbar-track {
 .imgsHolder {
   display: flex;
   justify-content: center;
-
 }
 
 .vertical-logo {
@@ -56,14 +56,15 @@ body::-webkit-scrollbar-track {
 .backgroundClass {
   height: 100%;
   min-height: calc(100vh - 64px);
-  background-image: url('https://next.backpack.tf/img/440/wallpapers/skibuster.jpg');
+  min-width: 600px;
+  background-image: url("https://next.backpack.tf/img/440/wallpapers/skibuster.jpg");
   background-color: rgb(7, 9, 8);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .holdMenu {
-  width: calc(100vw - 128px );
+  width: calc(100vw - 128px);
   display: flex;
   justify-content: center;
 }
@@ -76,11 +77,10 @@ body::-webkit-scrollbar-track {
 }
 
 .ant-menu-item-selected {
-  background-color: #566b89!important;
+  background-color: #566b89 !important;
   transition: background-color 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 
 .vertical-logo main {
   transition: 0.25s ease;
@@ -92,17 +92,17 @@ body::-webkit-scrollbar-track {
 
 .primary-color {
   /* Selected, etc*/
-  background-color: #1b2329!important;
-  }
+  background-color: #1b2329 !important;
+}
 
 .secondary-color {
   /* Header, Sidebar*/
-  background-color: #273241!important;
+  background-color: #273241 !important;
 }
 
 .tertiary-color {
   /* container */
-  background-color: rgb(27 35 41)!important;
+  background-color: rgb(27 35 41) !important;
 }
 
 @media (min-width: 1920px) {

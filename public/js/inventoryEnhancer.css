@@ -1,0 +1,42 @@
+.withdrawn-blocked {
+  border: 1px solid yellow !important;
+}
+
+.uncraftable {
+  border: 1px dashed gray;
+}
+
+.unusual {
+  border: 1px solid #240170;
+}
+
+.statTrak,
+.strange {
+  border: 1px solid #fb2803;
+}
+
+.painted {
+  border: 1px solid #58ff04;
+}
+
+.australium {
+  border: 1px solid #ffdb00;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.info {
+  font-weight: 100;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+  color: #6c757d;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed !important;
+  opacity: 0.3;
+}

@@ -14,35 +14,35 @@ import {
   BookOutlined,
   QuestionCircleOutlined,
   TrophyOutlined,
-} from '@ant-design/icons';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import { Layout, Menu, theme, Button } from 'antd';
-import React, { useState } from 'react';
-import './App.css';
+} from "@ant-design/icons";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { Layout, Menu, theme, Button } from "antd";
+import React, { useState } from "react";
+import "./App.css";
 
-import TutorialSettings from './pages/settingsTutorial.tsx'
-import ItemPageSettings from './pages/settingsItemPage.tsx'
-import ProfileSettings from './pages/settingsProfile.tsx'
-import InventorySettings from './pages/settingsInventory.tsx'
-import GiveawaySettings from './pages/settingsGiveways.tsx'
-import EnhancerSettings from './pages/settingsEnhancer.tsx'
+import TutorialSettings from "./pages/settingsTutorial.tsx";
+import ItemPageSettings from "./pages/settingsItemPage.tsx";
+import ProfileSettings from "./pages/settingsProfile.tsx";
+import InventorySettings from "./pages/settingsInventory.tsx";
+import GiveawaySettings from "./pages/settingsGiveways.tsx";
+import EnhancerSettings from "./pages/settingsEnhancer.tsx";
 
-import UpdatelogsPage from './pages/pageUpdateLogs.tsx'
-import BooksMarkPage from './pages/pageBooksMark.tsx'
-import FeaturesPage from './pages/pageFeatures.tsx'
-import FAQpage from './pages/pageFAQ.tsx'
-import DonatePage from './pages/pageDonate.tsx'
+import UpdatelogsPage from "./pages/pageUpdateLogs.tsx";
+import BooksMarkPage from "./pages/pageBooksMark.tsx";
+import FeaturesPage from "./pages/pageFeatures.tsx";
+import FAQpage from "./pages/pageFAQ.tsx";
+import DonatePage from "./pages/pageDonate.tsx";
 
-import iconFront from './images/iconFront.png';
-import iconBack from './images/iconBack.png';
+import iconFront from "./images/iconFront.png";
+import iconBack from "./images/iconBack.png";
 
 const { Header, Sider, Content } = Layout;
 
 function openConfigPage() {
-  if (typeof chrome !== 'undefined' && chrome.runtime) {
-    chrome.tabs.create({ url: 'index.html' });
+  if (typeof chrome !== "undefined" && chrome.runtime) {
+    chrome.tabs.create({ url: "index.html" });
   } else {
-    console.error('Chrome runtime is not available');
+    console.error("Chrome runtime is not available");
   }
 }
 
@@ -55,32 +55,30 @@ const App = () => {
   };
 
   const hideSidebar = () => {
-    setShowSidebar(false)
-    document.querySelector(".holdSidebar > button").style.display = 'none'
-
+    setShowSidebar(false);
+    document.querySelector(".holdSidebar > button").style.display = "none";
   };
 
   const allowSidebar = () => {
-    setShowSidebar(true)
-    setCollapsed(false)
-    document.querySelector(".holdSidebar > button").style.display = 'block'
-
+    setShowSidebar(true);
+    setCollapsed(false);
+    document.querySelector(".holdSidebar > button").style.display = "block";
   };
 
   return (
     <Router>
-      <Layout className='backgroundClass'>
+      <Layout className="backgroundClass">
         <Header
-          className='secondary-color'
+          className="secondary-color"
           style={{
-            position: 'sticky',
+            position: "sticky",
             top: 0,
             zIndex: 1,
-            width: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '0',
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0",
           }}
         >
           <div className="holdSidebar">
@@ -89,28 +87,50 @@ const App = () => {
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
               onClick={toggleSidebar}
               style={{
-                fontSize: '16px',
+                fontSize: "16px",
                 width: 64,
                 height: 64,
-                color: 'white',
+                color: "white",
               }}
             />
           </div>
-          <div className='secondary-color holdMenu'>
-            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']} className="secondary-color" style={{ width: '100%', justifyContent: 'center'}}>
-              <Menu.Item key="1" onClick={allowSidebar} icon={<SettingOutlined />}>
+          <div className="secondary-color holdMenu">
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["1"]}
+              className="secondary-color"
+              style={{ width: "100%", justifyContent: "center" }}
+            >
+              <Menu.Item
+                key="1"
+                onClick={allowSidebar}
+                icon={<SettingOutlined />}
+              >
                 <Link to="/settings">Settings</Link>
               </Menu.Item>
-              <Menu.Item key="2" onClick={hideSidebar} icon={<ExperimentOutlined />}>
+              <Menu.Item
+                key="2"
+                onClick={hideSidebar}
+                icon={<ExperimentOutlined />}
+              >
                 <Link to="/update-logs">Update Logs</Link>
               </Menu.Item>
               <Menu.Item key="3" onClick={hideSidebar} icon={<BookOutlined />}>
                 <Link to="/booksmark">Booksmark</Link>
               </Menu.Item>
-              <Menu.Item key="4" onClick={hideSidebar} icon={<QuestionCircleOutlined />}>
+              <Menu.Item
+                key="4"
+                onClick={hideSidebar}
+                icon={<QuestionCircleOutlined />}
+              >
                 <Link to="/faq">FAQ</Link>
               </Menu.Item>
-              <Menu.Item key="5" onClick={hideSidebar} icon={<TrophyOutlined />}>
+              <Menu.Item
+                key="5"
+                onClick={hideSidebar}
+                icon={<TrophyOutlined />}
+              >
                 <Link to="/features">Features</Link>
               </Menu.Item>
               <Menu.Item key="6" onClick={hideSidebar} icon={<HeartOutlined />}>
@@ -124,22 +144,39 @@ const App = () => {
               icon={<FullscreenOutlined />}
               onClick={openConfigPage}
               style={{
-                fontSize: '16px',
-                color: 'white',
+                fontSize: "16px",
+                color: "white",
                 width: 64,
                 height: 64,
               }}
             />
           </div>
         </Header>
-        <Layout className='secondary-color'>
+        <Layout className="secondary-color">
           {showSidebar && (
-            <Sider trigger={null} collapsible collapsed={collapsed} width={200} className='secondary-color' style={{minHeight: '100%'}}>
+            <Sider
+              trigger={null}
+              collapsible
+              collapsed={collapsed}
+              width={200}
+              className="secondary-color"
+              style={{ minHeight: "100%" }}
+            >
               <div className="imgsHolder">
-                <img src={iconFront} className="vertical-logo main" style={{ position: 'absolute' }} alt="Icon Front"/>
+                <img
+                  src={iconFront}
+                  className="vertical-logo main"
+                  style={{ position: "absolute" }}
+                  alt="Icon Front"
+                />
                 <img src={iconBack} className="vertical-logo" alt="Icon Back" />
               </div>
-              <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']} className='secondary-color'>
+              <Menu
+                theme="dark"
+                mode="inline"
+                defaultSelectedKeys={["1"]}
+                className="secondary-color"
+              >
                 <Menu.Item key="1" icon={<SmileOutlined />}>
                   <Link to="/settings">Tutorial</Link>
                 </Menu.Item>
@@ -161,20 +198,20 @@ const App = () => {
               </Menu>
             </Sider>
           )}
-          <Layout className='backgroundClass'>
+          <Layout className="backgroundClass">
             <Content
               className="container tertiary-color alignSelf-center borderRadius1"
               style={{
-                height: '100%',
-                margin: '24px 16px',
+                height: "100%",
+                margin: "24px 16px",
                 padding: 24,
                 minHeight: 280,
-                color: 'white',
+                color: "white",
                 background: theme.useToken().token.colorBgContainer,
               }}
             >
               <div
-              className="tertiary-color"
+                className="tertiary-color"
                 style={{
                   padding: 24,
                   minHeight: 380,
@@ -184,11 +221,26 @@ const App = () => {
                 <Routes>
                   <Route path="index.html" element={<TutorialSettings />} />
                   <Route path="/settings" element={<TutorialSettings />} />
-                  <Route path="/settings/itemPage" element={<ItemPageSettings />} />
-                  <Route path="/settings/profile" element={<ProfileSettings />} />
-                  <Route path="/settings/inventory" element={<InventorySettings />} />
-                  <Route path="/settings/enhancer" element={<EnhancerSettings />} />
-                  <Route path="/settings/giveways" element={<GiveawaySettings />} />
+                  <Route
+                    path="/settings/itemPage"
+                    element={<ItemPageSettings />}
+                  />
+                  <Route
+                    path="/settings/profile"
+                    element={<ProfileSettings />}
+                  />
+                  <Route
+                    path="/settings/inventory"
+                    element={<InventorySettings />}
+                  />
+                  <Route
+                    path="/settings/enhancer"
+                    element={<EnhancerSettings />}
+                  />
+                  <Route
+                    path="/settings/giveways"
+                    element={<GiveawaySettings />}
+                  />
 
                   <Route path="/booksmark" element={<BooksMarkPage />} />
                   <Route path="/update-logs" element={<UpdatelogsPage />} />
@@ -196,7 +248,6 @@ const App = () => {
                   <Route path="/features" element={<FeaturesPage />} />
                   <Route path="/faq" element={<FAQpage />} />
                   <Route path="/donate" element={<DonatePage />} />
-
                 </Routes>
               </div>
             </Content>
