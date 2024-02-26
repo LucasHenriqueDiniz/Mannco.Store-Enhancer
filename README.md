@@ -27,9 +27,14 @@ feat(src): Added a magical button that summons ads from every nook and cranny, p
 ## How to Test the Extension Locally
 
 ### To test the extension locally, follow these steps:
+Requiremnts: 
+Node.JS installed.
+
+Steps:
 - Download the repository.
-- Navigate to the repository's location using the command line (terminal).
+- Navigate to the repository's location using the command line (cd ./YourFolder/Mannco.Store-Enhancer).
+- Run : **npm install** to install all the packages.
 - Run : **npm run build**.
 - Open the browser's extensions page and select "Load Extension Without Compression"
-- Choose the "build" folder from the repository.
+- Choose the "build" folder from the Mannco.Store-Enhancer folder.
 - Done.
