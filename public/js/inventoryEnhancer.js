@@ -28,8 +28,6 @@ const onSaleItems = Array.from(
 );
 
 const AllItems = inventoryItems.concat(onSaleItems);
-const activeTab = document.querySelector(".nav-link.active").getAttribute("id");
-let currentActive;
 
 const csgoFloats = [
   "Minimal Wear",
@@ -42,21 +40,11 @@ const csgoFloats = [
 const isSpecialRarities = ["★", "StatTrak™", "Souvenir"];
 const isLevelSpecials = ["Level:100", "Level:69", "Level:1"];
 
-function updateActiveTab() {
-  if (activeTab === "pills-site-inventory-tab") {
-    currentActive = "Inventory";
-  } else {
-    currentActive = "OnSale";
-  }
-}
-
 onSaleButton.addEventListener("click", function () {
-  updateActiveTab();
   onSaleItems[0].click();
 });
 
 inventoryButton.addEventListener("click", function () {
-  updateActiveTab();
   inventoryItems[0].click();
 });
 

@@ -1,6 +1,23 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //def const DOMS
 
+const utmSource =
+  "&utm_source=https://github.com/LucasHenriqueDiniz&utm_medium=Mannco-Store-Enhancer";
+
+const currencyMap = {
+  USD: { number: 1, translation: "Dollar (United States)" },
+  GBP: { number: 2, translation: "Pound (United Kingdom)" },
+  EUR: { number: 3, translation: "Euro (European Union)" },
+  RUB: { number: 5, translation: "Ruble (Russia)" },
+  CNY: { number: 23, translation: "Renminbi (China)" },
+  PLN: { number: 6, translation: "Złoty (Poland)" },
+  PHP: { number: 12, translation: "Peso (Philippines)" },
+  BRL: { number: 7, translation: "Real (Brazil)" },
+  CAD: { number: 20, translation: "Dollar (Canada)" },
+  AUD: { number: 21, translation: "Dollar (Australia)" },
+  HKD: { number: 29, translation: "Dollar (Hong Kong)" },
+};
+
 function waitForSettings(callback) {
   const observer = new MutationObserver((mutationsList, observer) => {
     const settings = document.querySelector(".mannco-enhancer");
@@ -11,6 +28,8 @@ function waitForSettings(callback) {
   });
   observer.observe(document.body, { childList: true, subtree: true });
 }
+
+console.log("ItemPageEnhancer");
 
 function ItemPageEnhancer(config) {
   console.log(config);
@@ -50,24 +69,29 @@ function ItemPageEnhancer(config) {
         appendElement.appendChild(container);
     }*/
   function calcularFees(valorOriginal) {
-    // Verificar se o valor original é um número
-    if (typeof valorOriginal !== "number") {
+    // Validar se o valor original é um número
+    if (isNaN(valorOriginal)) {
+      console.error("Valor original inválido: " + valorOriginal);
       return 0;
     }
 
-    // Calcular o valor das fees
-    let fees;
-    if (valorOriginal < 0.11) {
-      fees = Math.floor(valorOriginal * 100) / 100; // Arredondar para duas casas decimais para valores menores que 0.11
-    } else {
-      fees = valorOriginal * 0.05; // Substitua 0.05 pela taxa correta para valores maiores ou iguais a 0.11
-    }
-    return parseFloat(fees.toFixed(2));
+    // Obter o valor das fees de acordo com a tabela
+    const fees =
+      valorOriginal === 0.01 || valorOriginal === 0.02
+        ? 0
+        : valorOriginal === 0.03
+        ? 0.01
+        : valorOriginal === 0.1 || valorOriginal === 0.11
+        ? 0.02
+        : valorOriginal * 0.05;
+
+    return fees;
   }
 
   function checkLucro(valorVenda) {
     return (sellValue - calcularFees(sellValue) - valorVenda).toFixed(2);
   }
+
   //copy info to clipboard easily
   function copyToClipboard(texto) {
     // Verifies if the Clipboard API is available in the browser
@@ -86,70 +110,62 @@ function ItemPageEnhancer(config) {
       });
   }
 
-  const itemPriceBox = document.querySelector("div.input-group.mb-3 > input");
-  const quantityBox = document.querySelector("div.form-group > input");
-  const itemPriceBoxBox = document.querySelector("div.col-xl-4.col-lg-7");
-  const pageSidebar = document.querySelector("#page-sidebar");
-  const itemSidebar = document.querySelector("#page-sidebar .item-sidebar");
-  const noLogin = document.querySelector(".nologinbo");
-  const buyOrderBackground = document.querySelector(
-    "#content > div:nth-child(4) > div"
+  // misc fixes to improve user experience
+  document.querySelector("#content > div:nth-child(3)").classList.add("mt-1");
+  document.querySelector(".placingtext").remove();
+  document
+    .querySelector("div.nologinbo > div.d-grid.gap-2.d-md-flex")
+    .classList.add("simetricalPlease");
+  document.querySelector(
+    "div.nologinbo > div.d-grid.gap-2.d-md-flex"
+  ).style.gridColumn = "span 2";
+  document.querySelector("div.nologinbo > div:nth-child(2)").style.gridColumn =
+    "span 2";
+
+  const itemPriceInput = document.querySelector("#cashout-priceach");
+  const quantityInput = document.querySelector("div.form-group > input");
+
+  const buyOrderCard = document.querySelector("#content > div:nth-child(4)");
+  buyOrderCard.classList.add("mt-1");
+
+  const buyOrderInputZone = document.querySelector(
+    "#content > div:nth-child(4) > div > div.col-xl-4.col-lg-7.pe-0 > div"
   );
+
+  const buttonsContainer = document.createElement("div");
+  const humanConfirm =
+    document.querySelector("#success-icon > circle") !== null;
+  buttonsContainer.classList.add("simetricalPlease");
+  buyOrderInputZone.appendChild(buttonsContainer);
+
   const moneyAvaible = parseFloat(
     document
       .querySelector("#account-dropdown > div > span.account-balance.ecurrency")
       .textContent.replace(/[^\d.,-]/g, "")
       .trim()
   );
-  const sellValue = parseFloat(
-    document
-      .querySelector(".card-body .important-text > span")
-      .textContent.replace(/[^\d.,-]/g, "")
-      .trim()
-  );
+  const sellValue =
+    parseFloat(
+      document
+        .querySelector(".card-body .important-text > span")
+        .textContent.replace(/[^\d.,-]/g, "")
+        .trim()
+    ) || 0;
   const firstSellingItems = document.querySelector("#transacContent").children;
 
-  let highestBuyOrder = Number(
-    document
-      .querySelector(
-        "#content > div:nth-child(4) > div > div > div.col-xl-8.col-lg-5.mt-md-3 > table > tbody > tr:nth-child(2) > td:nth-child(1)"
-      )
-      .textContent.slice(1)
-  );
-  if (isNaN(highestBuyOrder)) {
-    highestBuyOrder = 0.0;
-  }
+  let highestBuyOrder =
+    parseFloat(
+      document
+        .querySelector("table > tbody > tr:nth-child(2) > td:nth-child(1)")
+        .textContent.replace(/[^\d.,-]/g, "")
+        .trim()
+    ) || 0;
 
   const quantidadeBuyOrders =
-    document.querySelector(
-      "#content > div:nth-child(4) > div > div > div.col-xl-8.col-lg-5.mt-md-3 > table > tbody"
-    ).childElementCount - 1;
-
-  const parentDiv = document.querySelector(
-    "#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.input-group.mb-3"
-  );
-  const firstItemConteiner = document.querySelector(
-    "#page-sidebar > div.card.mb-0 > div > div.item-info > ul > li:nth-child(1) > dl > dd"
-  ).textContent;
-  const utmSource =
-    "&utm_source=https://github.com/LucasHenriqueDiniz&utm_medium=Mannco-Store-Enhancer";
-
-  const currencyMap = {
-    USD: { number: 1, translation: "Dollar (United States)" },
-    GBP: { number: 2, translation: "Pound (United Kingdom)" },
-    EUR: { number: 3, translation: "Euro (European Union)" },
-    RUB: { number: 5, translation: "Ruble (Russia)" },
-    CNY: { number: 23, translation: "Renminbi (China)" },
-    PLN: { number: 6, translation: "Złoty (Poland)" },
-    PHP: { number: 12, translation: "Peso (Philippines)" },
-    BRL: { number: 7, translation: "Real (Brazil)" },
-    CAD: { number: 20, translation: "Dollar (Canada)" },
-    AUD: { number: 21, translation: "Dollar (Australia)" },
-    HKD: { number: 29, translation: "Dollar (Hong Kong)" },
-  };
+    document.querySelector("table > tbody").childElementCount - 1 || 0;
 
   const itemName = document
-    .querySelector("#page-sidebar .item-name")
+    .querySelector(".item-info__type")
     .textContent.trim();
 
   //TextLater
@@ -196,12 +212,20 @@ function ItemPageEnhancer(config) {
       appID = null;
     }
   }
-  //
+
   if (config.enableItemPageEnhancer) {
+    if (config.removeGlobalAlert) {
+      document.querySelectorAll(".global-alert").forEach((e) => e.remove());
+    }
     //enableBoostOrderButton
     if (config.enableBoostOrderButton) {
       function plusOneCent() {
-        if (config.boostOrderCustomQuantity === 0) {
+        if (
+          config.boostOrderCustomQuantity === 0 ||
+          config.boostOrderCustomQuantity === "" ||
+          config.boostOrderCustomQuantity === null ||
+          config.boostOrderCustomQuantity === undefined
+        ) {
           quantidade =
             highestBuyOrder < 0.02
               ? 20
@@ -230,8 +254,8 @@ function ItemPageEnhancer(config) {
             );
         }
 
-        quantityBox.value = quantidade;
-        itemPriceBox.value = (
+        quantityInput.value = quantidade;
+        itemPriceInput.value = (
           highestBuyOrder + config.boostOrderCustomValue
         ).toFixed(2);
         Item.addBuyOrder();
@@ -256,14 +280,31 @@ function ItemPageEnhancer(config) {
       centOrder.className = "btn btn-primary AutoOrder";
       centOrder.textContent = JustOneCentButtonTextContentEN;
       centOrder.title = JustOneCentButtonTitleEN;
-      noLogin.appendChild(centOrder);
+      buttonsContainer.appendChild(centOrder);
       centOrder.addEventListener("click", plusOneCent);
-
-      /*ADD LATER FUNCTION IN ALL PAGE WITH ALL CUSTOMKEYPRESSES 
-            if (config.activeBoostOrderOnKeyPress) {
-                config.customKeyPressBoostOrder //Enter
-            }*/
     }
+
+    if (config.removeItemDetailsTitle) {
+      document.querySelector("#content > div:nth-child(1) > h1").remove();
+    }
+
+    if (config.removeBreadcrumb) {
+      document.querySelector("#content > div:nth-child(1) > nav").remove();
+    }
+    if (config.removeItemDetailsTitle || config.removeBreadcrumb) {
+      document
+        .querySelector("#content > div.row > div.col-lg-8 > div")
+        .classList.add("mt-0");
+      document
+        .querySelector("#content > div.row > div.col-lg-4 > div")
+        .classList.add("mt-0");
+      document
+        .querySelector(
+          "#content > div.row > div.col-lg-4 > div > div.card-body.border-top"
+        )
+        .classList.add("pt-1");
+    }
+
     //enableJustOneCentButton
     if (config.enableJustOneCentButton) {
       function createOneCentOrder() {
@@ -289,8 +330,8 @@ function ItemPageEnhancer(config) {
             );
         }
 
-        quantityBox.value = quantidade;
-        itemPriceBox.value = 0.01;
+        quantityInput.value = quantidade;
+        itemPriceInput.value = 0.01;
         Item.addBuyOrder();
 
         switch (config.autoRefreshPageAfterSetNewBuyOrder) {
@@ -313,7 +354,7 @@ function ItemPageEnhancer(config) {
       justOneCent.className = "btn btn-primary justOneCent";
       justOneCent.textContent = justOneCentTextContent;
       justOneCent.title = justOneCentTitle;
-      noLogin.appendChild(justOneCent);
+      buttonsContainer.appendChild(justOneCent);
       justOneCent.addEventListener("click", createOneCentOrder);
 
       /*
@@ -354,8 +395,8 @@ function ItemPageEnhancer(config) {
             );
         }
 
-        quantityBox.value = quantidade;
-        itemPriceBox.value = highestBuyOrder.toFixed(2);
+        quantityInput.value = quantidade;
+        itemPriceInput.value = highestBuyOrder.toFixed(2);
 
         Item.addBuyOrder();
 
@@ -379,7 +420,7 @@ function ItemPageEnhancer(config) {
       matchingBuyOrder.className = "btn btn-primary matchingBuyOrder";
       matchingBuyOrder.textContent = matchingBuyOrderTextContent;
       matchingBuyOrder.title = matchingBuyOrderTitle;
-      noLogin.appendChild(matchingBuyOrder);
+      buttonsContainer.appendChild(matchingBuyOrder);
       matchingBuyOrder.addEventListener("click", createMatchingBuyOrder);
 
       /*
@@ -424,48 +465,6 @@ function ItemPageEnhancer(config) {
         }
       });
     }
-    //Minimize Item Info
-    if (config.itemPageMinimizeItemInfo) {
-      var HideItemInfo = document.createElement("div");
-      if (config.itemPageMinimizeItemInfoDefaultStance === "minimized") {
-        itemSidebar.style.height =
-          document.querySelector("#page-sidebar div.card-item").clientHeight +
-          55 +
-          "px";
-        HideItemInfo.setAttribute("value", "true");
-      } else {
-        HideItemInfo.setAttribute("value", "false");
-      }
-
-      HideItemInfo.className = "hide-item";
-      pageSidebar.appendChild(HideItemInfo);
-
-      circole = document.createElement("div");
-      circole.className = "circle-item";
-      HideItemInfo.appendChild(circole);
-
-      var iconElement = document.createElement("i");
-      iconElement.className = "fa fa-arrow-down";
-      HideItemInfo.appendChild(iconElement);
-
-      HideItemInfo.addEventListener("click", function (event) {
-        var contentHeight =
-          document.querySelector("#page-sidebar div.card-item").clientHeight +
-          55;
-
-        if (event.currentTarget.getAttribute("value") === "false") {
-          requestAnimationFrame(function () {
-            itemSidebar.style.height = contentHeight + "px";
-          });
-          event.currentTarget.setAttribute("value", "true");
-        } else {
-          requestAnimationFrame(function () {
-            itemSidebar.style.height = "100%";
-          });
-          event.currentTarget.setAttribute("value", "false");
-        }
-      });
-    }
     //Adds button to view skin on swap.gg to inspec online
     if (config.openCsgoSkinInSwap) {
       if (appID == 730) {
@@ -478,25 +477,30 @@ function ItemPageEnhancer(config) {
             );
           let button = document.createElement("button");
           button.textContent = "View on swap.gg";
-          button.className = "btn btn-secondary";
+          button.className = "btn btn-sm btn-secondary";
           button.onclick = function () {
             window.open(
               `https://market.swap.gg/screenshot?inspectLink=${inspectLink}`
             );
           };
-          firstSellingItems[i].appendChild(button);
+          firstSellingItems[i]
+            .querySelector(".table-items__actions")
+            .appendChild(button);
         }
       }
     }
     //Add button on item name to copy to clipboard using the copyToClipboard function
     if (config.buyOrdersCopyItemNameToClipboard) {
-      var itemNameElement = document.querySelector("#page-sidebar .item-name");
+      var itemNameElement = document.querySelector(
+        "#content > div.row > div.col-lg-8 > div > div > div.item-info__aside > h2"
+      );
+
+      itemNameElement.style.display = "flex";
+      itemNameElement.style.flexDirection = "row";
 
       const clipboard = document.createElement("i");
       clipboard.className = "fa fa-clipboard-list clipboard";
       if (itemNameElement.children.length != 1) {
-        clipboard.style.position = "absolute";
-        clipboard.style.right = "15%";
       }
       itemNameElement.appendChild(clipboard);
       itemNameElement.title = clipBoardTitle;
@@ -530,18 +534,18 @@ function ItemPageEnhancer(config) {
       document
         .querySelector("#content > div > div > div > div > table > tbody > tr")
         .appendChild(ProfitLabel);
-      for (var i = 1; quantidadeBuyOrders >= i; i++) {
-        let currentBuyOrderRaw = document.querySelector(
-          `#content > div:nth-child(4) > div > div > div.col-xl-8.col-lg-5.mt-md-3 > table > tbody > tr:nth-child(${
-            i + 1
-          }) > td:nth-child(1)`
-        );
-        let currentBuyOrder = currentBuyOrderRaw.textContent
-          .slice(1)
-          .replace(" or less", "");
-        currentBuyOrderRaw.parentNode.className = "profitHover";
 
-        let profitValue = checkLucro(currentBuyOrder);
+      for (var i = 1; quantidadeBuyOrders >= i; i++) {
+        const currentRow = document.querySelector(
+          `table > tbody > tr:nth-child(${i})`
+        );
+
+        let currentBuyOrderRaw =
+          currentRow.firstElementChild.textContent.replace(/[^\d.,-]/g, "");
+
+        currentRow.classList.add("profitHover");
+
+        let profitValue = checkLucro(currentBuyOrderRaw);
 
         var profitLabel = document.createElement("td");
         profitLabel.textContent = "$" + profitValue;
@@ -552,20 +556,18 @@ function ItemPageEnhancer(config) {
         }
 
         document
-          .querySelector(
-            "#content > div:nth-child(4) > div > div > div.col-xl-8.col-lg-5.mt-md-3 > table > tbody"
-          )
+          .querySelector("div > table > tbody")
           .children[i].appendChild(profitLabel);
 
         profitLabel.parentElement.addEventListener("click", function (event) {
           try {
-            itemPriceBox.value =
+            itemPriceInput.value =
               event.currentTarget.firstElementChild.textContent.replace(
                 /[^\d.,-]/g,
                 ""
               );
-            if (quantityBox.value === "") {
-              quantityBox.value = 1;
+            if (quantityInput.value === "") {
+              quantityInput.value = 1;
             }
           } catch (err) {
             console.log("error with profitcalculator", err);
@@ -575,110 +577,62 @@ function ItemPageEnhancer(config) {
     }
     // remove the graph chart for the item sales
     if (config.itemPageRemoveSalesGraph) {
-      document.querySelector(
-        ".card-body.card-chart"
-      ).parentElement.style.display = "none";
+      document.querySelector(".card-body.card-chart").parentElement.remove();
     }
     //add a button to hide the item graph chart
     if (
       config.itemPageMinimizeSalesGraphButton &&
       !config.itemPageRemoveSalesGraph
     ) {
-      //itemPageSalesGraphDefaultStance
-      const graphCard = document.querySelector(".card-body.card-chart");
-      const graphHeader = document.querySelector(
+      const h1 = document.querySelector(
         "#content > div:nth-child(3) > div > h3"
       );
+      const graphCard = document.querySelector(".card-body.card-chart");
 
-      var salesGraphBtn = document.createElement("div");
+      // Create the new div and its contents
+      const div = document.createElement("div");
+      div.style.display = "flex";
+      div.style.justifyContent = "space-between";
+      div.style.alignItems = "center";
 
-      if (config.itemPageSalesGraphDefaultStance === "minimized") {
-        graphCard.style.height = graphHeader.clientHeight + 25 + "px";
-        graphHeader.setAttribute("value", false);
-      } else {
-        graphHeader.setAttribute("value", true);
-      }
-      salesGraphBtn.className = "salesGraphIcon";
-      graphHeader.appendChild(salesGraphBtn);
+      const newH1 = document.createElement("h1");
+      newH1.textContent = h1.textContent;
+      newH1.style.fontSize = "1rem";
+      div.appendChild(newH1);
 
-      var iconGraph = document.createElement("i");
-      iconGraph.className = "fa fa-chevron-down";
-      salesGraphBtn.appendChild(iconGraph);
+      const hideGraphButton = document.createElement("button");
+      hideGraphButton.textContent = "/\\";
+      hideGraphButton.classList.add("btn", "btn-secondary");
+      div.appendChild(hideGraphButton);
 
-      salesGraphBtn.addEventListener("click", function (event) {
-        if (event.currentTarget.getAttribute("value") === "false") {
-          graphCard.style.height = graphHeader.clientHeight + 25 + "px";
-          event.currentTarget.setAttribute("value", "true");
+      graphCard.style.height = "25px";
+      hideGraphButton.setAttribute("value", false);
+
+      // Replace the h1 with the new div
+      h1.parentNode.replaceChild(div, h1);
+
+      // Handle button clicks for graph minimization
+      hideGraphButton.addEventListener("click", function (event) {
+        if (hideGraphButton.getAttribute("value") === "true") {
+          graphCard.style.height = "25px";
+          hideGraphButton.textContent = "/\\";
+          hideGraphButton.setAttribute("value", false);
         } else {
-          graphCard.style.height = "500px";
-          event.currentTarget.setAttribute("value", "false");
+          graphCard.style.height = "auto";
+          hideGraphButton.textContent = "\\/";
+          hideGraphButton.setAttribute("value", true);
         }
       });
-    }
-    //fixes some small things, most of them is because the site is ugly and bad :z
-    if (config.itemPageSmallFixes) {
-      //fix item icon
-      document.querySelector(
-        "#page-sidebar div.card-item > img"
-      ).style.maxWidth = "100%";
-      //center the item name
-      document.querySelector("#page-sidebar div.card-item").style.textAlign =
-        "center";
-      //remove gamees selector
-      document
-        .querySelector(
-          "#header-navbar > ul.navbar-nav.header__navbar-links > li:nth-child(1)"
-        )
-        .remove();
-      //remove buy order text
-      document.querySelector(".placingtext").style.display = "none";
-      //centrelize Sales History
-      document.querySelector(".card-body.card-chart > h3").style.display =
-        "flex";
-      document.querySelector(".card-body.card-chart > h3").style.alignItems =
-        "center";
-      //add shadow to item name to help to read
-      document.querySelector("#page-sidebar div.card-item").style.textShadow =
-        "1px 1px 4px rgba(0, 0, 0, 1)";
-      //add radius to backgroundBuyOrder the borders remove it
-      buyOrderBackground.style.borderRadius = "1rem";
-      //
-      document.querySelector(".form-control.boprice ").style.borderRadius =
-        "1rem 0 0 0";
-      //
-      document.querySelector("#recipient-username-addon").style.borderRadius =
-        "1rem";
-    }
-    //organize buttons layout
-    if (config.organizeButtonsLayout) {
-      if (
-        !document
-          .querySelector("div.nologinbo > form .removebuyorder")
-          .checkVisibility()
-      ) {
-        document
-          .querySelector("div.nologinbo > .addbuyorder")
-          .classList.add("grid-2");
-        document.querySelector("div.nologinbo > form").style.display = "none";
-      }
-
-      if (document.querySelector("div.nologinbo").children.length % 2 == 0) {
-        document
-          .querySelector("div.nologinbo")
-          .lastElementChild.classList.add("grid-2");
-      }
-    } else {
-      document.querySelector("div.nologinbo").style.display = "block";
     }
     //chenges buyorder background depending if you have hghest buy order
     if (config.changeBuyOrdersBackgroundIfNotHighestBuyOrder) {
       try {
         if (sellValue === highestBuyOrder) {
-          buyOrderBackground.style.backgroundColor = String(
+          buyOrderCard.style.backgroundColor = String(
             config.buyOrdersBackgroundColorTrue
           );
         } else {
-          buyOrderBackground.style.backgroundColor = String(
+          buyOrderCard.style.backgroundColor = String(
             config.buyOrdersBackgroundColorFalse
           );
         }
@@ -689,13 +643,13 @@ function ItemPageEnhancer(config) {
     //chenges buyorder border depending if you have hghest buy order
     if (config.changeBuyOrdersBorderIfNotHighestBuyOrder) {
       try {
-        buyOrderBackground.style.borderStyle = config.buyOrdersBorderStyle;
+        buyOrderCard.style.borderStyle = config.buyOrdersBorderStyle;
         if (sellValue === highestBuyOrder) {
-          buyOrderBackground.style.backgroundColor = String(
+          buyOrderCard.style.backgroundColor = String(
             config.buyOrdersBorderColorTrue
           );
         } else {
-          buyOrderBackground.style.backgroundColor = String(
+          buyOrderCard.style.backgroundColor = String(
             config.buyOrdersBorderColorFalse
           );
         }
@@ -703,11 +657,11 @@ function ItemPageEnhancer(config) {
         console.log(err, "error with bg border");
       }
     }
-    //adds a profit label in the price box
-    if (config.buyOrdersShowCurrentFees) {
+    // FIXME: This feature is not working
+    if (config.buyOrdersShowCurrentFees && false) {
       function updateFeesElement() {
-        var boxValue = itemPriceBox.value;
-        var quantityValue = quantityBox.value;
+        var boxValue = itemPriceInput.value;
+        var quantityValue = quantityInput.value;
 
         if (quantityValue === "") {
           quantityValue = 1;
@@ -720,14 +674,14 @@ function ItemPageEnhancer(config) {
           afterFeesMessage + afterFeesValue;
       }
 
-      itemPriceBox.addEventListener("input", updateFeesElement);
-      quantityBox.addEventListener("input", updateFeesElement);
+      itemPriceInput.addEventListener("input", updateFeesElement);
+      quantityInput.addEventListener("input", updateFeesElement);
 
       var afterFeesElement = document.createElement("div");
       afterFeesElement.textContent = afterFeesMessage + "$0.00";
       afterFeesElement.className = "fees-calculator";
       afterFeesElement.id = "afterFeesValue";
-      itemPriceBox.parentNode.appendChild(afterFeesElement);
+      itemPriceInput.parentNode.appendChild(afterFeesElement);
 
       document.querySelector(
         "div.nologinbo > div.input-group.mb-3"
@@ -739,7 +693,7 @@ function ItemPageEnhancer(config) {
         "div.nologinbo > div.input-group.mb-3"
       ).style.height = "80px";
 
-      if (itemPriceBox.value != "") {
+      if (itemPriceInput.value != "") {
         updateFeesElement();
       }
     }
@@ -759,9 +713,9 @@ function ItemPageEnhancer(config) {
             : true;
 
         if (isOnHold) {
-          currentItem.style.border = "2px solid yellow";
+          currentItem.style.border = "1px dashed yellow";
         } else if (isPainted) {
-          currentItem.style.border = "2px solid green";
+          currentItem.style.border = "1px dashed green";
         }
       }
     }

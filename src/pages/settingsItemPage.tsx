@@ -1,11 +1,17 @@
 /*global chrome*/
 
-import React, { useEffect, useState } from 'react';
-import { Divider } from 'antd';
+import React, { useEffect, useState } from "react";
+import { Divider } from "antd";
 
-import './settings.css';
-import { CreateSwitch, CreateColorPicker, CreateSelector, CreateValueBox, CreateTextBox } from "./functions/functions.jsx"
-import ScrollToTopButton from "./functions/scrollToTop.jsx"
+import "./settings.css";
+import {
+  CreateSwitch,
+  CreateColorPicker,
+  CreateSelector,
+  CreateValueBox,
+  CreateTextBox,
+} from "./functions/functions.jsx";
+import ScrollToTopButton from "./functions/scrollToTop.jsx";
 
 const ItemPageSettings = () => {
   //enable
@@ -15,55 +21,93 @@ const ItemPageSettings = () => {
   const [itemPageSmallFixes, setItemPageSmallFixes] = useState(false);
   const [openCsgoSkinInSwap, setOpenCsgoSkinInSwap] = useState(false);
   const [itemPageGoToTopOfPage, setItemPageGoToTopOfPage] = useState(false);
-  const [itemPageRemoveSalesGraph, setItemPageRemoveSalesGraph] = useState(false);
-  const [itemPageMinimizeSalesGraphButton, setItemPageMinimizeSalesGraphButton] = useState(false);
-  const [itemPageSalesGraphDefaultStance, setItemPageSalesGraphDefaultStance] = useState('minimized');
-  const [hideItemInfo, setHideItemInfo] = useState('true')
-  const [hideItemInfoDefaultStance, setHideItemInfoDefaultStance] = useState('minimized')
+  const [itemPageRemoveSalesGraph, setItemPageRemoveSalesGraph] =
+    useState(false);
+  const [
+    itemPageMinimizeSalesGraphButton,
+    setItemPageMinimizeSalesGraphButton,
+  ] = useState(false);
+  const [hideItemInfo, setHideItemInfo] = useState("true");
+  const [hideItemInfoDefaultStance, setHideItemInfoDefaultStance] =
+    useState("minimized");
 
   //Boost Order Button
   const [enableBoostOrderButton, setEnableBoostOrderButton] = useState(true);
   const [boostOrderCustomQuantity, setBoostOrderCustomQuantity] = useState(0);
   const [boostOrderCustomValue, setBoostOrderCustomValue] = useState(0.01);
-  const [activeBoostOrderOnKeyPress, setActiveBoostOrderOnKeyPress] = useState(false);
-  const [customKeyPressBoostOrder, setCustomKeyPressBoostOrder] = useState('Enter');
+  const [activeBoostOrderOnKeyPress, setActiveBoostOrderOnKeyPress] =
+    useState(false);
+  const [customKeyPressBoostOrder, setCustomKeyPressBoostOrder] =
+    useState("Enter");
 
   //Matching BuyOrder
-  const [enableMatchingBuyOrderButton, setEnableMatchingBuyOrderButton] = useState(false);
-  const [matchingBuyOrderCustomQuantity, setMatchingBuyOrderCustomQuantity] = useState(0);
-  const [activeMatchingBuyOrderOnKeyPress, setActiveMatchingBuyOrderOnKeyPress] = useState(false);
-  const [customKeyPressMatchingBuyOrder, setCustomKeyPressMatchingBuyOrder] = useState('');
+  const [enableMatchingBuyOrderButton, setEnableMatchingBuyOrderButton] =
+    useState(false);
+  const [matchingBuyOrderCustomQuantity, setMatchingBuyOrderCustomQuantity] =
+    useState(0);
+  const [
+    activeMatchingBuyOrderOnKeyPress,
+    setActiveMatchingBuyOrderOnKeyPress,
+  ] = useState(false);
+  const [customKeyPressMatchingBuyOrder, setCustomKeyPressMatchingBuyOrder] =
+    useState("");
 
   //Just One Cent
   const [enableJustOneCentButton, setEnableJustOneCentButton] = useState(false);
   const [justOneCentCustomQuantity, setJustOneCentCustomQuantity] = useState(0);
-  const [activeJustOneCentOnKeyPress, setActiveJustOneCentOnKeyPress] = useState(false);
-  const [customKeyPressJustOneCent, setCustomKeyPressJustOneCent] = useState('');
+  const [activeJustOneCentOnKeyPress, setActiveJustOneCentOnKeyPress] =
+    useState(false);
+  const [customKeyPressJustOneCent, setCustomKeyPressJustOneCent] =
+    useState("");
 
   //Misc Buttons
   const [organizeButtonsLayout, setOrganizeButtonsLayout] = useState(false);
-  const [autoRefreshPageAfterSetNewBuyOrder, setAutoRefreshPageAfterSetNewBuyOrder] = useState(false);
-  const [automaticallyAjustBuyOrderQuantityWithAvaibleMoney, setAutomaticallyAjustBuyOrderQuantityWithAvaibleMoney] = useState(false);
+  const [
+    autoRefreshPageAfterSetNewBuyOrder,
+    setAutoRefreshPageAfterSetNewBuyOrder,
+  ] = useState(false);
+  const [
+    automaticallyAjustBuyOrderQuantityWithAvaibleMoney,
+    setAutomaticallyAjustBuyOrderQuantityWithAvaibleMoney,
+  ] = useState(false);
 
   //change bg for buy orders value
-  const [changeBuyOrdersBackgroundIfNotHighestBuyOrder, setChangeBuyOrdersBackgroundIfNotHighestBuyOrder] = useState(false);
-  const [buyOrdersBackgroundColorTrue, setBuyOrdersBackgroundColorTrue] = useState('');
-  const [buyOrdersBackgroundColorFalse, setBuyOrdersBackgroundColorFalse] = useState('');
-  const [changeBuyOrdersBorderIfNotHighestBuyOrder, setChangeBuyOrdersBorderIfNotHighestBuyOrder] = useState(false);
-  const [buyOrdersBorderStyle, setBuyOrdersBorderStyle] = useState('');
-  const [buyOrdersBorderColorTrue, setBuyOrdersBorderColorTrue] = useState('');
-  const [buyOrdersBorderColorFalse, setBuyOrdersBorderColorFalse] = useState('');
+  const [
+    changeBuyOrdersBackgroundIfNotHighestBuyOrder,
+    setChangeBuyOrdersBackgroundIfNotHighestBuyOrder,
+  ] = useState(false);
+  const [buyOrdersBackgroundColorTrue, setBuyOrdersBackgroundColorTrue] =
+    useState("");
+  const [buyOrdersBackgroundColorFalse, setBuyOrdersBackgroundColorFalse] =
+    useState("");
+  const [
+    changeBuyOrdersBorderIfNotHighestBuyOrder,
+    setChangeBuyOrdersBorderIfNotHighestBuyOrder,
+  ] = useState(false);
+  const [buyOrdersBorderStyle, setBuyOrdersBorderStyle] = useState("");
+  const [buyOrdersBorderColorTrue, setBuyOrdersBorderColorTrue] = useState("");
+  const [buyOrdersBorderColorFalse, setBuyOrdersBorderColorFalse] =
+    useState("");
 
   //profit calculator
-  const [buyOrdersEnableProfitCalculator, setBuyOrdersEnableProfitCalculator] = useState(false);
-  const [buyOrdersShowCurrentFees, setBuyOrdersShowCurrentFees] = useState(false);
+  const [buyOrdersEnableProfitCalculator, setBuyOrdersEnableProfitCalculator] =
+    useState(false);
+  const [buyOrdersShowCurrentFees, setBuyOrdersShowCurrentFees] =
+    useState(false);
 
   //copy to clipboard
-  const [itemPageCopyItemPriceToClipboard, setitemPageCopyItemPriceToClipboard] = useState(false);
-  const [buyOrdersCopyItemNameToClipboard, setBuyOrdersCopyItemNameToClipboard] = useState(false);
+  const [
+    itemPageCopyItemPriceToClipboard,
+    setitemPageCopyItemPriceToClipboard,
+  ] = useState(false);
+  const [
+    buyOrdersCopyItemNameToClipboard,
+    setBuyOrdersCopyItemNameToClipboard,
+  ] = useState(false);
 
   //More price info
-  const [enableOtherMarketplacesPrices, setEnableOtherMarketplacesPrices] = useState(true);
+  const [enableOtherMarketplacesPrices, setEnableOtherMarketplacesPrices] =
+    useState(true);
   const [enableSteamPrices, setEnableSteamPrices] = useState(true);
   const [enableBackPackTfPrices, setEnableBackPackTfPrices] = useState(true);
   const [enableBuff163Prices, setEnableBuff163Prices] = useState(true);
@@ -89,6 +133,13 @@ const ItemPageSettings = () => {
   const [enableTradeitGgPrices, setEnableTradeitGgPrices] = useState(true);
   const [enableWaxpeerPrices, setEnableWaxpeerPrices] = useState(true);
 
+  //global
+  const [removeGlobalBanner, setRemoveGlobalBanner] = useState(true);
+
+  //itemPage
+  const [removeItemDetailsTitle, setRemoveItemDetailsTitle] = useState(true);
+  const [removeBreadcrumb, setRemoveBreadcrumb] = useState(true);
+
   useEffect(() => {
     loadSettings();
   }, []);
@@ -96,142 +147,395 @@ const ItemPageSettings = () => {
   const loadSettings = () => {
     chrome.storage.sync.get(
       [
-        'enableItemPageEnhancer',
-        'itemPageSmallFixes',
-        'openCsgoSkinInSwap',
-        'itemPageGoToTopOfPage',
-        'itemPageRemoveSalesGraph',
-        'itemPageMinimizeSalesGraphButton',
-        'itemPageSalesGraphDefaultStance',
-        'hideItemInfo',
-        'hideItemInfoDefaultStance',
-        'enableBoostOrderButton',
-        'boostOrderCustomQuantity',
-        'boostOrderCustomValue',
-        'activeBoostOrderOnKeyPress',
-        'customKeyPressBoostOrder',
-        'enableMatchingBuyOrderButton',
-        'matchingBuyOrderCustomQuantity',
-        'activeMatchingBuyOrderOnKeyPress',
-        'customKeyPressMatchingBuyOrder',
-        'enableJustOneCentButton',
-        'justOneCentCustomQuantity',
-        'activeJustOneCentOnKeyPress',
-        'customKeyPressJustOneCent',
-        'organizeButtonsLayout',
-        'autoRefreshPageAfterSetNewBuyOrder',
-        'automaticallyAjustBuyOrderQuantityWithAvaibleMoney',
-        'changeBuyOrdersBackgroundIfNotHighestBuyOrder',
-        'buyOrdersBackgroundColorTrue',
-        'buyOrdersBackgroundColorFalse',
-        'changeBuyOrdersBorderIfNotHighestBuyOrder',
-        'buyOrdersBorderStyle',
-        'buyOrdersBorderColorTrue',
-        'buyOrdersBorderColorFalse',
-        'buyOrdersEnableProfitCalculator',
-        'buyOrdersShowCurrentFees',
-        'itemPageCopyItemPriceToClipboard',
-        'buyOrdersCopyItemNameToClipboard',
-        'enableOtherMarketplacesPrices',
-        'enableSteamPrices',
-        'enableBackPackTfPrices',
-        'enableBuff163Prices',
-        'enableBuffMarketPrices',
-        'enableBitSkinsPrices',
-        'enableBitskinsPrices',
-        'enableCsDealsPrices',
-        'enableCsMoneyPrices',
-        'enableCsTradePrices',
-        'enableCsgoFloatPrices',
-        'enableDMarketPrices',
-        'enableGamerPayPrices',
-        'enableLootFarmPrices',
-        'enableLisSkinsPrices',
-        'enableManncoStorePrices',
-        'enableMarketCsgoPrices',
-        'enableSwapGgPrices',
-        'enableShadowPayPrices',
-        'enableSkinBaronPrices',
-        'enableSkinBidPrices',
-        'enableSkinportPrices',
-        'enableTf2TmPrices',
-        'enableTradeitGgPrices',
-        'enableWaxpeerPrices'
+        "enableItemPageEnhancer",
+        "removeItemDetailsTitle",
+        "removeBreadcrumb",
+        "removeGlobalBanner",
+        "itemPageSmallFixes",
+        "openCsgoSkinInSwap",
+        "itemPageGoToTopOfPage",
+        "itemPageRemoveSalesGraph",
+        "itemPageMinimizeSalesGraphButton",
+        "hideItemInfo",
+        "hideItemInfoDefaultStance",
+        "enableBoostOrderButton",
+        "boostOrderCustomQuantity",
+        "boostOrderCustomValue",
+        "activeBoostOrderOnKeyPress",
+        "customKeyPressBoostOrder",
+        "enableMatchingBuyOrderButton",
+        "matchingBuyOrderCustomQuantity",
+        "activeMatchingBuyOrderOnKeyPress",
+        "customKeyPressMatchingBuyOrder",
+        "enableJustOneCentButton",
+        "justOneCentCustomQuantity",
+        "activeJustOneCentOnKeyPress",
+        "customKeyPressJustOneCent",
+        "organizeButtonsLayout",
+        "autoRefreshPageAfterSetNewBuyOrder",
+        "automaticallyAjustBuyOrderQuantityWithAvaibleMoney",
+        "changeBuyOrdersBackgroundIfNotHighestBuyOrder",
+        "buyOrdersBackgroundColorTrue",
+        "buyOrdersBackgroundColorFalse",
+        "changeBuyOrdersBorderIfNotHighestBuyOrder",
+        "buyOrdersBorderStyle",
+        "buyOrdersBorderColorTrue",
+        "buyOrdersBorderColorFalse",
+        "buyOrdersEnableProfitCalculator",
+        "buyOrdersShowCurrentFees",
+        "itemPageCopyItemPriceToClipboard",
+        "buyOrdersCopyItemNameToClipboard",
+        "enableOtherMarketplacesPrices",
+        "enableSteamPrices",
+        "enableBackPackTfPrices",
+        "enableBuff163Prices",
+        "enableBuffMarketPrices",
+        "enableBitSkinsPrices",
+        "enableBitskinsPrices",
+        "enableCsDealsPrices",
+        "enableCsMoneyPrices",
+        "enableCsTradePrices",
+        "enableCsgoFloatPrices",
+        "enableDMarketPrices",
+        "enableGamerPayPrices",
+        "enableLootFarmPrices",
+        "enableLisSkinsPrices",
+        "enableManncoStorePrices",
+        "enableMarketCsgoPrices",
+        "enableSwapGgPrices",
+        "enableShadowPayPrices",
+        "enableSkinBaronPrices",
+        "enableSkinBidPrices",
+        "enableSkinportPrices",
+        "enableTf2TmPrices",
+        "enableTradeitGgPrices",
+        "enableWaxpeerPrices",
       ],
       (result) => {
+        setRemoveGlobalBanner(
+          result.removeGlobalBanner !== undefined
+            ? result.removeGlobalBanner
+            : true
+        );
+        setRemoveItemDetailsTitle(
+          result.removeItemDetailsTitle !== undefined
+            ? result.removeItemDetailsTitle
+            : true
+        );
+        setRemoveBreadcrumb(
+          result.removeBreadcrumb !== undefined ? result.removeBreadcrumb : true
+        );
         // MainBtn
-        setEnableItemPageEnhancer(result.enableItemPageEnhancer !== undefined ? result.enableItemPageEnhancer : true);
-        setItemPageSmallFixes(result.itemPageSmallFixes !== undefined ? result.itemPageSmallFixes : true);
-        setOpenCsgoSkinInSwap(result.openCsgoSkinInSwap !== undefined ? result.openCsgoSkinInSwap : true);
-        setItemPageGoToTopOfPage(result.itemPageGoToTopOfPage !== undefined ? result.itemPageGoToTopOfPage : true);
+        setEnableItemPageEnhancer(
+          result.enableItemPageEnhancer !== undefined
+            ? result.enableItemPageEnhancer
+            : true
+        );
+        setItemPageSmallFixes(
+          result.itemPageSmallFixes !== undefined
+            ? result.itemPageSmallFixes
+            : true
+        );
+        setOpenCsgoSkinInSwap(
+          result.openCsgoSkinInSwap !== undefined
+            ? result.openCsgoSkinInSwap
+            : true
+        );
+        setItemPageGoToTopOfPage(
+          result.itemPageGoToTopOfPage !== undefined
+            ? result.itemPageGoToTopOfPage
+            : true
+        );
 
-        setItemPageRemoveSalesGraph(result.itemPageRemoveSalesGraph !== undefined ? result.itemPageRemoveSalesGraph : false);
-        setItemPageMinimizeSalesGraphButton(result.itemPageMinimizeSalesGraphButton !== undefined ? result.itemPageMinimizeSalesGraphButton : true);
-        setItemPageSalesGraphDefaultStance(result.itemPageSalesGraphDefaultStance !== undefined ? result.itemPageSalesGraphDefaultStance : 'minimized');
+        setItemPageRemoveSalesGraph(
+          result.itemPageRemoveSalesGraph !== undefined
+            ? result.itemPageRemoveSalesGraph
+            : false
+        );
+        setItemPageMinimizeSalesGraphButton(
+          result.itemPageMinimizeSalesGraphButton !== undefined
+            ? result.itemPageMinimizeSalesGraphButton
+            : true
+        );
 
-        setEnableBoostOrderButton(result.enableBoostOrderButton !== undefined ? result.enableBoostOrderButton : true);
-        setBoostOrderCustomQuantity(result.boostOrderCustomQuantity !== undefined ? result.boostOrderCustomQuantity : 0);
-        setBoostOrderCustomValue(result.boostOrderCustomValue !== undefined ? result.boostOrderCustomValue : -0.01);
-        setActiveBoostOrderOnKeyPress(result.activeBoostOrderOnKeyPress !== undefined ? result.activeBoostOrderOnKeyPress : false);
-        setCustomKeyPressBoostOrder(result.customKeyPressBoostOrder !== undefined ? result.customKeyPressBoostOrder : '');
+        setEnableBoostOrderButton(
+          result.enableBoostOrderButton !== undefined
+            ? result.enableBoostOrderButton
+            : true
+        );
+        setBoostOrderCustomQuantity(
+          result.boostOrderCustomQuantity !== undefined
+            ? result.boostOrderCustomQuantity
+            : 0
+        );
+        setBoostOrderCustomValue(
+          result.boostOrderCustomValue !== undefined
+            ? result.boostOrderCustomValue
+            : -0.01
+        );
+        setActiveBoostOrderOnKeyPress(
+          result.activeBoostOrderOnKeyPress !== undefined
+            ? result.activeBoostOrderOnKeyPress
+            : false
+        );
+        setCustomKeyPressBoostOrder(
+          result.customKeyPressBoostOrder !== undefined
+            ? result.customKeyPressBoostOrder
+            : ""
+        );
 
-        setHideItemInfo(result.hideItemInfo !== undefined ? result.hideItemInfo : true);
-        setHideItemInfoDefaultStance(result.hideItemInfoDefaultStance !== undefined ? result.hideItemInfoDefaultStance : 'minimized');
+        setHideItemInfo(
+          result.hideItemInfo !== undefined ? result.hideItemInfo : true
+        );
+        setHideItemInfoDefaultStance(
+          result.hideItemInfoDefaultStance !== undefined
+            ? result.hideItemInfoDefaultStance
+            : "minimized"
+        );
 
-        setEnableMatchingBuyOrderButton(result.enableMatchingBuyOrderButton !== undefined ? result.enableMatchingBuyOrderButton : false);
-        setMatchingBuyOrderCustomQuantity(result.matchingBuyOrderCustomQuantity !== undefined ? result.matchingBuyOrderCustomQuantity : 0);
-        setActiveMatchingBuyOrderOnKeyPress(result.activeMatchingBuyOrderOnKeyPress !== undefined ? result.activeMatchingBuyOrderOnKeyPress : false);
-        setCustomKeyPressMatchingBuyOrder(result.customKeyPressMatchingBuyOrder !== undefined ? result.customKeyPressMatchingBuyOrder : '');
+        setEnableMatchingBuyOrderButton(
+          result.enableMatchingBuyOrderButton !== undefined
+            ? result.enableMatchingBuyOrderButton
+            : false
+        );
+        setMatchingBuyOrderCustomQuantity(
+          result.matchingBuyOrderCustomQuantity !== undefined
+            ? result.matchingBuyOrderCustomQuantity
+            : 0
+        );
+        setActiveMatchingBuyOrderOnKeyPress(
+          result.activeMatchingBuyOrderOnKeyPress !== undefined
+            ? result.activeMatchingBuyOrderOnKeyPress
+            : false
+        );
+        setCustomKeyPressMatchingBuyOrder(
+          result.customKeyPressMatchingBuyOrder !== undefined
+            ? result.customKeyPressMatchingBuyOrder
+            : ""
+        );
 
-        setEnableJustOneCentButton(result.enableJustOneCentButton !== undefined ? result.enableJustOneCentButton : true);
-        setJustOneCentCustomQuantity(result.justOneCentCustomQuantity !== undefined ? result.justOneCentCustomQuantity : 50);
-        setActiveJustOneCentOnKeyPress(result.activeJustOneCentOnKeyPress !== undefined ? result.activeJustOneCentOnKeyPress : false);
-        setCustomKeyPressJustOneCent(result.customKeyPressJustOneCent !== undefined ? result.customKeyPressJustOneCent : '');
+        setEnableJustOneCentButton(
+          result.enableJustOneCentButton !== undefined
+            ? result.enableJustOneCentButton
+            : true
+        );
+        setJustOneCentCustomQuantity(
+          result.justOneCentCustomQuantity !== undefined
+            ? result.justOneCentCustomQuantity
+            : 50
+        );
+        setActiveJustOneCentOnKeyPress(
+          result.activeJustOneCentOnKeyPress !== undefined
+            ? result.activeJustOneCentOnKeyPress
+            : false
+        );
+        setCustomKeyPressJustOneCent(
+          result.customKeyPressJustOneCent !== undefined
+            ? result.customKeyPressJustOneCent
+            : ""
+        );
 
-        setOrganizeButtonsLayout(result.organizeButtonsLayout !== undefined ? result.organizeButtonsLayout : true);
-        setAutoRefreshPageAfterSetNewBuyOrder(result.autoRefreshPageAfterSetNewBuyOrder !== undefined ? result.autoRefreshPageAfterSetNewBuyOrder : true);
-        setAutomaticallyAjustBuyOrderQuantityWithAvaibleMoney(result.automaticallyAjustBuyOrderQuantityWithAvaibleMoney !== undefined ? result.automaticallyAjustBuyOrderQuantityWithAvaibleMoney : true);
+        setOrganizeButtonsLayout(
+          result.organizeButtonsLayout !== undefined
+            ? result.organizeButtonsLayout
+            : true
+        );
+        setAutoRefreshPageAfterSetNewBuyOrder(
+          result.autoRefreshPageAfterSetNewBuyOrder !== undefined
+            ? result.autoRefreshPageAfterSetNewBuyOrder
+            : true
+        );
+        setAutomaticallyAjustBuyOrderQuantityWithAvaibleMoney(
+          result.automaticallyAjustBuyOrderQuantityWithAvaibleMoney !==
+            undefined
+            ? result.automaticallyAjustBuyOrderQuantityWithAvaibleMoney
+            : true
+        );
 
-        setChangeBuyOrdersBackgroundIfNotHighestBuyOrder(result.changeBuyOrdersBackgroundIfNotHighestBuyOrder !== undefined ? result.changeBuyOrdersBackgroundIfNotHighestBuyOrder : false);
-        setBuyOrdersBackgroundColorFalse(result.buyOrdersBackgroundColor !== undefined ? result.buyOrdersBackgroundColor : '#52a447');
-        setBuyOrdersBackgroundColorTrue(result.buyOrdersBackgroundColor !== undefined ? result.buyOrdersBackgroundColor : '#c61a09');
+        setChangeBuyOrdersBackgroundIfNotHighestBuyOrder(
+          result.changeBuyOrdersBackgroundIfNotHighestBuyOrder !== undefined
+            ? result.changeBuyOrdersBackgroundIfNotHighestBuyOrder
+            : false
+        );
+        setBuyOrdersBackgroundColorFalse(
+          result.buyOrdersBackgroundColor !== undefined
+            ? result.buyOrdersBackgroundColor
+            : "#52a447"
+        );
+        setBuyOrdersBackgroundColorTrue(
+          result.buyOrdersBackgroundColor !== undefined
+            ? result.buyOrdersBackgroundColor
+            : "#c61a09"
+        );
 
-        setChangeBuyOrdersBorderIfNotHighestBuyOrder(result.changeBuyOrdersBorderIfNotHighestBuyOrder !== undefined ? result.changeBuyOrdersBorderIfNotHighestBuyOrder : true);
-        setBuyOrdersBorderStyle(result.buyOrdersBorderStyle !== undefined ? result.buyOrdersBorderStyle : 'groove');
-        setBuyOrdersBorderColorTrue(result.buyOrdersBorderColorTrue !== undefined ? result.buyOrdersBorderColorTrue : '#52a447');
-        setBuyOrdersBorderColorFalse(result.buyOrdersBorderColorFalse !== undefined ? result.buyOrdersBorderColorFalse : '#c61a09');
+        setChangeBuyOrdersBorderIfNotHighestBuyOrder(
+          result.changeBuyOrdersBorderIfNotHighestBuyOrder !== undefined
+            ? result.changeBuyOrdersBorderIfNotHighestBuyOrder
+            : true
+        );
+        setBuyOrdersBorderStyle(
+          result.buyOrdersBorderStyle !== undefined
+            ? result.buyOrdersBorderStyle
+            : "groove"
+        );
+        setBuyOrdersBorderColorTrue(
+          result.buyOrdersBorderColorTrue !== undefined
+            ? result.buyOrdersBorderColorTrue
+            : "#52a447"
+        );
+        setBuyOrdersBorderColorFalse(
+          result.buyOrdersBorderColorFalse !== undefined
+            ? result.buyOrdersBorderColorFalse
+            : "#c61a09"
+        );
 
-        setBuyOrdersEnableProfitCalculator(result.buyOrdersEnableProfitCalculator !== undefined ? result.buyOrdersEnableProfitCalculator : true);
-        setBuyOrdersShowCurrentFees(result.buyOrdersShowCurrentFees !== undefined ? result.buyOrdersShowCurrentFees : true);
+        setBuyOrdersEnableProfitCalculator(
+          result.buyOrdersEnableProfitCalculator !== undefined
+            ? result.buyOrdersEnableProfitCalculator
+            : true
+        );
+        setBuyOrdersShowCurrentFees(
+          result.buyOrdersShowCurrentFees !== undefined
+            ? result.buyOrdersShowCurrentFees
+            : true
+        );
 
-        setitemPageCopyItemPriceToClipboard(result.itemPageCopyItemPriceToClipboard !== undefined ? result.itemPageCopyItemPriceToClipboard : true);
-        setBuyOrdersCopyItemNameToClipboard(result.buyOrdersCopyItemNameToClipboard !== undefined ? result.buyOrdersCopyItemNameToClipboard : true);
+        setitemPageCopyItemPriceToClipboard(
+          result.itemPageCopyItemPriceToClipboard !== undefined
+            ? result.itemPageCopyItemPriceToClipboard
+            : true
+        );
+        setBuyOrdersCopyItemNameToClipboard(
+          result.buyOrdersCopyItemNameToClipboard !== undefined
+            ? result.buyOrdersCopyItemNameToClipboard
+            : true
+        );
 
-        setEnableOtherMarketplacesPrices(result.enableOtherMarketplacesPrices !== undefined ? result.enableOtherMarketplacesPrices : true);
-        setEnableSteamPrices(result.enableSteamPrices !== undefined ? result.enableSteamPrices : true);
-        setEnableBackPackTfPrices(result.enableBackPackTfPrices !== undefined ? result.enableBackPackTfPrices : false);
-        setEnableBuff163Prices(result.enableBuff163Prices !== undefined ? result.enableBuff163Prices : true);
-        setEnableBuffMarketPrices(result.enableBuffMarketPrices !== undefined ? result.enableBuffMarketPrices : true);
-        setEnableBitSkinsPrices(result.enableBitSkinsPrices !== undefined ? result.enableBitSkinsPrices : true);
-        setEnableBitskinsPrices(result.enableBitskinsPrices !== undefined ? result.enableBitskinsPrices : true);
-        setEnableCsDealsPrices(result.enableCsDealsPrices !== undefined ? result.enableCsDealsPrices : true);
-        setEnableCsMoneyPrices(result.enableCsMoneyPrices !== undefined ? result.enableCsMoneyPrices : true);
-        setEnableCsTradePrices(result.enableCsTradePrices !== undefined ? result.enableCsTradePrices : true);
-        setEnableCsgoFloatPrices(result.enableCsgoFloatPrices !== undefined ? result.enableCsgoFloatPrices : true);
-        setEnableDMarketPrices(result.enableDMarketPrices !== undefined ? result.enableDMarketPrices : true);
-        setEnableGamerPayPrices(result.enableGamerPayPrices !== undefined ? result.enableGamerPayPrices : true);
-        setEnableLootFarmPrices(result.enableLootFarmPrices !== undefined ? result.enableLootFarmPrices : true);
-        setEnableLisSkinsPrices(result.enableLisSkinsPrices !== undefined ? result.enableLisSkinsPrices : true);
-        setEnableManncoStorePrices(result.enableManncoStorePrices !== undefined ? result.enableManncoStorePrices : false);
-        setEnableMarketCsgoPrices(result.enableMarketCsgoPrices !== undefined ? result.enableMarketCsgoPrices : true);
-        setEnableSwapGgPrices(result.enableSwapGgPrices !== undefined ? result.enableSwapGgPrices : true);
-        setEnableShadowPayPrices(result.enableShadowPayPrices !== undefined ? result.enableShadowPayPrices : true);
-        setEnableSkinBaronPrices(result.enableSkinBaronPrices !== undefined ? result.enableSkinBaronPrices : true);
-        setEnableSkinBidPrices(result.enableSkinBidPrices !== undefined ? result.enableSkinBidPrices : true);
-        setEnableSkinportPrices(result.enableSkinportPrices !== undefined ? result.enableSkinportPrices : true);
-        setEnableTf2TmPrices(result.enableTf2TmPrices !== undefined ? result.enableTf2TmPrices : true);
-        setEnableTradeitGgPrices(result.enableTradeitGgPrices !== undefined ? result.enableTradeitGgPrices : true);
-        setEnableWaxpeerPrices(result.enableWaxpeerPrices !== undefined ? result.enableWaxpeerPrices : true);
+        setEnableOtherMarketplacesPrices(
+          result.enableOtherMarketplacesPrices !== undefined
+            ? result.enableOtherMarketplacesPrices
+            : true
+        );
+        setEnableSteamPrices(
+          result.enableSteamPrices !== undefined
+            ? result.enableSteamPrices
+            : true
+        );
+        setEnableBackPackTfPrices(
+          result.enableBackPackTfPrices !== undefined
+            ? result.enableBackPackTfPrices
+            : false
+        );
+        setEnableBuff163Prices(
+          result.enableBuff163Prices !== undefined
+            ? result.enableBuff163Prices
+            : true
+        );
+        setEnableBuffMarketPrices(
+          result.enableBuffMarketPrices !== undefined
+            ? result.enableBuffMarketPrices
+            : true
+        );
+        setEnableBitSkinsPrices(
+          result.enableBitSkinsPrices !== undefined
+            ? result.enableBitSkinsPrices
+            : true
+        );
+        setEnableBitskinsPrices(
+          result.enableBitskinsPrices !== undefined
+            ? result.enableBitskinsPrices
+            : true
+        );
+        setEnableCsDealsPrices(
+          result.enableCsDealsPrices !== undefined
+            ? result.enableCsDealsPrices
+            : true
+        );
+        setEnableCsMoneyPrices(
+          result.enableCsMoneyPrices !== undefined
+            ? result.enableCsMoneyPrices
+            : true
+        );
+        setEnableCsTradePrices(
+          result.enableCsTradePrices !== undefined
+            ? result.enableCsTradePrices
+            : true
+        );
+        setEnableCsgoFloatPrices(
+          result.enableCsgoFloatPrices !== undefined
+            ? result.enableCsgoFloatPrices
+            : true
+        );
+        setEnableDMarketPrices(
+          result.enableDMarketPrices !== undefined
+            ? result.enableDMarketPrices
+            : true
+        );
+        setEnableGamerPayPrices(
+          result.enableGamerPayPrices !== undefined
+            ? result.enableGamerPayPrices
+            : true
+        );
+        setEnableLootFarmPrices(
+          result.enableLootFarmPrices !== undefined
+            ? result.enableLootFarmPrices
+            : true
+        );
+        setEnableLisSkinsPrices(
+          result.enableLisSkinsPrices !== undefined
+            ? result.enableLisSkinsPrices
+            : true
+        );
+        setEnableManncoStorePrices(
+          result.enableManncoStorePrices !== undefined
+            ? result.enableManncoStorePrices
+            : false
+        );
+        setEnableMarketCsgoPrices(
+          result.enableMarketCsgoPrices !== undefined
+            ? result.enableMarketCsgoPrices
+            : true
+        );
+        setEnableSwapGgPrices(
+          result.enableSwapGgPrices !== undefined
+            ? result.enableSwapGgPrices
+            : true
+        );
+        setEnableShadowPayPrices(
+          result.enableShadowPayPrices !== undefined
+            ? result.enableShadowPayPrices
+            : true
+        );
+        setEnableSkinBaronPrices(
+          result.enableSkinBaronPrices !== undefined
+            ? result.enableSkinBaronPrices
+            : true
+        );
+        setEnableSkinBidPrices(
+          result.enableSkinBidPrices !== undefined
+            ? result.enableSkinBidPrices
+            : true
+        );
+        setEnableSkinportPrices(
+          result.enableSkinportPrices !== undefined
+            ? result.enableSkinportPrices
+            : true
+        );
+        setEnableTf2TmPrices(
+          result.enableTf2TmPrices !== undefined
+            ? result.enableTf2TmPrices
+            : true
+        );
+        setEnableTradeitGgPrices(
+          result.enableTradeitGgPrices !== undefined
+            ? result.enableTradeitGgPrices
+            : true
+        );
+        setEnableWaxpeerPrices(
+          result.enableWaxpeerPrices !== undefined
+            ? result.enableWaxpeerPrices
+            : true
+        );
       }
     );
   };
@@ -239,7 +543,7 @@ const ItemPageSettings = () => {
   return (
     <div>
       <div>
-        <h2 className='title'> Item Page Configurations </h2>
+        <h2 className="title"> Item Page Configurations </h2>
       </div>
 
       <CreateSwitch
@@ -341,7 +645,6 @@ const ItemPageSettings = () => {
         enableDisabledOption={!activeMatchingBuyOrderOnKeyPress}
       />
 
-
       <Divider>
         <h3>Just One Cent Button</h3>
       </Divider>
@@ -402,15 +705,15 @@ const ItemPageSettings = () => {
         enableSettingName={automaticallyAjustBuyOrderQuantityWithAvaibleMoney}
         storageKey="automaticallyAjustBuyOrderQuantityWithAvaibleMoney"
         text="Automatically Adjust Buy Order Quantity with Available Money"
-        setEnableSettingName={setAutomaticallyAjustBuyOrderQuantityWithAvaibleMoney}
+        setEnableSettingName={
+          setAutomaticallyAjustBuyOrderQuantityWithAvaibleMoney
+        }
         enableDisabledOption={!enableItemPageEnhancer}
       />
-
 
       <Divider>
         <h3>Page Settings:</h3>
       </Divider>
-
 
       <CreateSwitch
         enableSettingName={hideItemInfo}
@@ -426,7 +729,7 @@ const ItemPageSettings = () => {
         text="Buy Orders Border Style"
         setEnableSettingName={setHideItemInfoDefaultStance}
         enableDisabledOption={!changeBuyOrdersBorderIfNotHighestBuyOrder}
-        options={['minimized', 'open']}
+        options={["minimized", "open"]}
       />
 
       <CreateSwitch
@@ -463,8 +766,20 @@ const ItemPageSettings = () => {
         text="Buy Orders Border Style"
         setEnableSettingName={setBuyOrdersBorderStyle}
         enableDisabledOption={!changeBuyOrdersBorderIfNotHighestBuyOrder}
-        options={['USD', 'GBP', 'EUR', 'RUB', 'CNY', 'PLN', 'PHP', 'BRL', 'CAD', 'AUD', 'HKD']}
-        />
+        options={[
+          "USD",
+          "GBP",
+          "EUR",
+          "RUB",
+          "CNY",
+          "PLN",
+          "PHP",
+          "BRL",
+          "CAD",
+          "AUD",
+          "HKD",
+        ]}
+      />
 
       <CreateColorPicker
         enableSettingName={buyOrdersBorderColorTrue}
@@ -553,13 +868,32 @@ const ItemPageSettings = () => {
         enableDisabledOption={itemPageRemoveSalesGraph}
       />
 
-      <CreateSelector
-        enableSettingName={itemPageSalesGraphDefaultStance}
-        storageKey="itemPageSalesGraphDefaultStance"
-        text="Default Stance for Sales Graph on Item Page"
-        setEnableSettingName={setItemPageSalesGraphDefaultStance}
-        enableDisabledOption={itemPageRemoveSalesGraph}
-        options={['minimized', 'maximized']}
+      <Divider>
+        <h3>Global Settings</h3>
+      </Divider>
+
+      <CreateSwitch
+        enableSettingName={removeGlobalBanner}
+        storageKey="removeGlobalBanner"
+        text="Remove Global Banner"
+        setEnableSettingName={setRemoveGlobalBanner}
+        enableDisabledOption={false}
+      />
+
+      <CreateSwitch
+        enableSettingName={removeItemDetailsTitle}
+        storageKey="removeItemDetailsTitle"
+        text="Remove Item Details Title"
+        setEnableSettingName={setRemoveItemDetailsTitle}
+        enableDisabledOption={false}
+      />
+
+      <CreateSwitch
+        enableSettingName={removeBreadcrumb}
+        storageKey="removeBreadcrumb"
+        text="Remove Breadcrumb"
+        setEnableSettingName={setRemoveBreadcrumb}
+        enableDisabledOption={false}
       />
 
       <Divider>
@@ -766,8 +1100,6 @@ const ItemPageSettings = () => {
       />
 
       <ScrollToTopButton />
-
-
     </div>
   );
 };

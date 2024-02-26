@@ -1,98 +1,100 @@
 /*global chrome*/
 
-    const config = {
-        enableItemPageEnhancer: true,//
+const config = {
+  enableItemPageEnhancer: true, //
 
-        itemPageSmallFixes: true,//
-        openCsgoSkinInSwap: true,//
-        itemPageGoToTopOfPage: true,//
+  itemPageSmallFixes: true, //
+  openCsgoSkinInSwap: true, //
+  itemPageGoToTopOfPage: true, //
 
-        itemPageRemoveSalesGraph: false,//
-        itemPageMinimizeSalesGraphButton: true,//
-        itemPageSalesGraphDefaultStance: 'minimized',//
-        
-        itemPageMinimizeItemInfo: true,//
-        itemPageMinimizeItemInfoDefaultStance: 'minimized',//
+  itemPageRemoveSalesGraph: false, //
+  itemPageMinimizeSalesGraphButton: true, //
+  itemPageSalesGraphDefaultStance: "minimized", //
 
-        enableBoostOrderButton: true,//
-        boostOrderCustomQuantity: 0,//
-        boostOrderCustomValue: 0.01,//
-        activeBoostOrderOnKeyPress: false,//
-        customKeyPressBoostOrder: 'Enter',//
+  itemPageMinimizeItemInfo: true, //
+  itemPageMinimizeItemInfoDefaultStance: "minimized", //
 
-        enableMatchingBuyOrderButton: true,//
-        matchingBuyOrderCustomQuantity: 0,//
-        activeMatchingBuyOrderOnKeyPress: false,//
-        customKeyPressMatchingBuyOrder: '',//
+  enableBoostOrderButton: true, //
+  boostOrderCustomQuantity: 0, //
+  boostOrderCustomValue: 0.01, //
+  activeBoostOrderOnKeyPress: false, //
+  customKeyPressBoostOrder: "Enter", //
 
-        enableJustOneCentButton: true,//
-        justOneCentCustomQuantity: 0,//
-        activeJustOneCentOnKeyPress: false,//
-        customKeyPressJustOneCent: '',//
+  enableMatchingBuyOrderButton: true, //
+  matchingBuyOrderCustomQuantity: 0, //
+  activeMatchingBuyOrderOnKeyPress: false, //
+  customKeyPressMatchingBuyOrder: "", //
 
-        organizeButtonsLayout: true, //
-        autoRefreshPageAfterSetNewBuyOrder: true,//
-        automaticallyAjustBuyOrderQuantityWithAvaibleMoney: true,//
+  enableJustOneCentButton: true, //
+  justOneCentCustomQuantity: 0, //
+  activeJustOneCentOnKeyPress: false, //
+  customKeyPressJustOneCent: "", //
 
-        changeBuyOrdersBackgroundIfNotHighestBuyOrder: true,//
-        buyOrdersBackgroundColorTrue: '#52a447',//
-        buyOrdersBackgroundColorFalse: '#c61a09',//
-        changeBuyOrdersBorderIfNotHighestBuyOrder: true,//
-        buyOrdersBorderStyle: 'groove',//
-        buyOrdersBorderColorTrue: '#52a447',//
-        buyOrdersBorderColorFalse: '#c61a09',//
+  organizeButtonsLayout: true, //
+  autoRefreshPageAfterSetNewBuyOrder: true, //
+  automaticallyAjustBuyOrderQuantityWithAvaibleMoney: true, //
 
-        buyOrdersEnableProfitCalculator: true,//
-        buyOrdersShowCurrentFees: true, //
+  changeBuyOrdersBackgroundIfNotHighestBuyOrder: true, //
+  buyOrdersBackgroundColorTrue: "#52a447", //
+  buyOrdersBackgroundColorFalse: "#c61a09", //
+  changeBuyOrdersBorderIfNotHighestBuyOrder: true, //
+  buyOrdersBorderStyle: "groove", //
+  buyOrdersBorderColorTrue: "#52a447", //
+  buyOrdersBorderColorFalse: "#c61a09", //
 
-        itemPageCopyItemPriceToClipboard: true,//
-        buyOrdersCopyItemNameToClipboard: true,//
+  buyOrdersEnableProfitCalculator: true, //
+  buyOrdersShowCurrentFees: true, //
 
-        enableOtherMarketplacesPrices: true,
-        enableSteamPrices: true,
-        enableBackPackTfPrices: true,
-        enableBuff163Prices: true,
-        enableBuffMarketPrices: true,
-        enableBitSkinsPrices: true,
-        enableBitskinsPrices: true,
-        enableCsDealsPrices: true,
-        enableCsMoneyPrices: true,
-        enableCsTradePrices: true,
-        enableCsgoFloatPrices: true,
-        enableDMarketPrices: true,
-        enableGamerPayPrices: true,
-        enableLootFarmPrices: true,
-        enableLisSkinsPrices: true,
-        enableManncoStorePrices: true,
-        enableMarketCsgoPrices: true,
-        enableSwapGgPrices: true,
-        enableShadowPayPrices: true,
-        enableSkinBaronPrices: true,
-        enableSkinBidPrices: true,
-        enableSkinportPrices: true,
-        enableTf2TmPrices: true,
-        enableTradeitGgPrices: true,
-        enableWaxpeerPrices: true,
+  itemPageCopyItemPriceToClipboard: true, //
+  buyOrdersCopyItemNameToClipboard: true, //
 
-        //enhancer settings
-        currenciesValue: 1
-    };
-  
-  function handleConfigData(config) {
-    chrome.storage.sync.get(Object.keys(config), (result) => {
-      Object.keys(config).forEach((key) => {
-        config[key] = result[key] !== undefined ? result[key] : config[key];
-      });
-      
-      const configElement = document.createElement('div');
-      configElement.className = 'mannco-enhancer'
-      configElement.setAttribute('data-config', JSON.stringify(config));
-      document.body.appendChild(configElement);
-      
-      // Call a function and pass the config data
-      // handleConfigData(config);
+  enableOtherMarketplacesPrices: true,
+  enableSteamPrices: true,
+  enableBackPackTfPrices: true,
+  enableBuff163Prices: true,
+  enableBuffMarketPrices: true,
+  enableBitSkinsPrices: true,
+  enableBitskinsPrices: true,
+  enableCsDealsPrices: true,
+  enableCsMoneyPrices: true,
+  enableCsTradePrices: true,
+  enableCsgoFloatPrices: true,
+  enableDMarketPrices: true,
+  enableGamerPayPrices: true,
+  enableLootFarmPrices: true,
+  enableLisSkinsPrices: true,
+  enableManncoStorePrices: true,
+  enableMarketCsgoPrices: true,
+  enableSwapGgPrices: true,
+  enableShadowPayPrices: true,
+  enableSkinBaronPrices: true,
+  enableSkinBidPrices: true,
+  enableSkinportPrices: true,
+  enableTf2TmPrices: true,
+  enableTradeitGgPrices: true,
+  enableWaxpeerPrices: true,
+
+  //enhancer settings
+  currenciesValue: 1,
+  removeGlobalBanner: true,
+  removeItemDetailsTitle: true,
+  removeBreadcrumb: true,
+};
+
+function handleConfigData(config) {
+  chrome.storage.sync.get(Object.keys(config), (result) => {
+    Object.keys(config).forEach((key) => {
+      config[key] = result[key] !== undefined ? result[key] : config[key];
     });
-  }
-  
-  handleConfigData(config);
-  
+
+    const configElement = document.createElement("div");
+    configElement.className = "mannco-enhancer";
+    configElement.setAttribute("data-config", JSON.stringify(config));
+    document.body.appendChild(configElement);
+
+    // Call a function and pass the config data
+    // handleConfigData(config);
+  });
+}
+
+handleConfigData(config);

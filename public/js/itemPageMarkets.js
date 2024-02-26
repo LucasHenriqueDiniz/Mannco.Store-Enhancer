@@ -1,302 +1,325 @@
 function waitForSettings(callback) {
-
-    const observer = new MutationObserver((mutationsList, observer) => {
-        const settings = document.querySelector(".mannco-enhancer");
-        if (settings) {
-            observer.disconnect();
-            callback(JSON.parse(settings.dataset.config));
-        }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
+  const observer = new MutationObserver((mutationsList, observer) => {
+    const settings = document.querySelector(".mannco-enhancer");
+    if (settings) {
+      observer.disconnect();
+      callback(JSON.parse(settings.dataset.config));
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
 }
 
 function itemPageEnhancerMarkets(config) {
-    console.log(config)
+  console.log("itemPageEnhancerMarket is disabled for now");
+  return 0;
+  console.log(config);
 
+  const utmSource = "&utm_source=https://github.com/LucasHenriqueDiniz";
 
-    const parentDiv = document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.input-group.mb-3")
-    const firstItemConteiner = document.querySelector("#page-sidebar > div.card.mb-0 > div > div.item-info > ul > li:nth-child(1) > dl > dd").textContent
-    const utmSource = '&utm_source=https://github.com/LucasHenriqueDiniz'
-        const pageSidebar = document.querySelector("#page-sidebar")
-    
-    const currencyMap = {
-        USD: { number: 1, translation: 'Dollar (United States)' },
-        GBP: { number: 2, translation: 'Pound (United Kingdom)' },
-        EUR: { number: 3, translation: 'Euro (European Union)' },
-        RUB: { number: 5, translation: 'Ruble (Russia)' },
-        CNY: { number: 23, translation: 'Renminbi (China)' },
-        PLN: { number: 6, translation: 'Złoty (Poland)' },
-        PHP: { number: 12, translation: 'Peso (Philippines)' },
-        BRL: { number: 7, translation: 'Real (Brazil)' },
-        CAD: { number: 20, translation: 'Dollar (Canada)' },
-        AUD: { number: 21, translation: 'Dollar (Australia)' },
-        HKD: { number: 29, translation: 'Dollar (Hong Kong)' }
-      };
-      
-      const itemName = document.querySelector("#page-sidebar > div > div > div.card-item > h2 > span").textContent.trim()
-    
-    var appID = window.location.href.match(/(?<=\/)[0-9]{3,6}/g)
-    if (appID != 440 && appID != 730 && appID != 252490 && appID != 570) {
-        var dt = document.querySelectorAll('dt')
-        if (dt[dt.length - 1].textContent === "SKU") {
-            appID = 440;
-            console.log(appID)
-        } else if (dt[dt.length - 2].textContent === "Hero") {
-            appID = 570;
-            console.log(appID)
-        } else if (dt.length === 2) {
-            appID = 252490;
-            console.log("lenght = 2 - appID = " + appID)
-        } else if (dt.length === 4) {
-            appID = 730;
-            console.log(appID)
-        } else {
-            console.log("SKU NOT FOUND")
-            appID = null;
-        }
+  const currencyMap = {
+    USD: { number: 1, translation: "Dollar (United States)" },
+    GBP: { number: 2, translation: "Pound (United Kingdom)" },
+    EUR: { number: 3, translation: "Euro (European Union)" },
+    RUB: { number: 5, translation: "Ruble (Russia)" },
+    CNY: { number: 23, translation: "Renminbi (China)" },
+    PLN: { number: 6, translation: "Złoty (Poland)" },
+    PHP: { number: 12, translation: "Peso (Philippines)" },
+    BRL: { number: 7, translation: "Real (Brazil)" },
+    CAD: { number: 20, translation: "Dollar (Canada)" },
+    AUD: { number: 21, translation: "Dollar (Australia)" },
+    HKD: { number: 29, translation: "Dollar (Hong Kong)" },
+  };
+
+  const itemName = document
+    .querySelector(".item-info__type")
+    .textContent.trim();
+
+  var appID = window.location.href.match(/(?<=\/)[0-9]{3,6}/g);
+  if (appID != 440 && appID != 730 && appID != 252490 && appID != 570) {
+    var dt = document.querySelectorAll("dt");
+    if (dt[dt.length - 1].textContent === "SKU") {
+      appID = 440;
+      console.log(appID);
+    } else if (dt[dt.length - 2].textContent === "Hero") {
+      appID = 570;
+      console.log(appID);
+    } else if (dt.length === 2) {
+      appID = 252490;
+      console.log("lenght = 2 - appID = " + appID);
+    } else if (dt.length === 4) {
+      appID = 730;
+      console.log(appID);
+    } else {
+      console.log("SKU NOT FOUND");
+      appID = null;
     }
-    
-    var gameIdMap = {
-        440: 'tf2',
-        730: 'csgo',
-        252490: 'rust',
-        570: 'dota2'
-    }
-    // Mapeamento de sites para links e imagens
-    const siteMap = {
-        'Tradeit.gg': {
-            link: '',
-            imgSrc: 'https://tradeit.gg/_nuxt/img/logo_horizontal.8189732.svg',
-            fees: '5'
-        },
-        'Market CSGO': {
-            link: '',
-            imgSrc: 'https://i.imgur.com/SucZNHt.png',
-            fees: '5'
-        },
-        'ShadowPay': {
-            link: '',
-            imgSrc: 'https://docs.shadowpay.com/images/logo.png',
-            fees: '5'
-        },
-        'DMarket': {
-            link: `https://dmarket.com/ingame-items/item-list/${gameIdMap[appID]}-skins?title=${encodeURIComponent(itemName)}`,
-            imgSrc: 'https://cdn.freebiesupply.com/logos/large/2x/dmarket-logo-svg-vector.svg',
-            fees: '3'
-        },
-        'Bitskins': {
-            link: '',
-            imgSrc: 'https://csgo-bets.org/wp-content/uploads/2021/07/bitskins.png',
-            fees: '2'
-        },
-        'BUFF163': {
-            link: '',
-            imgSrc: 'https://i.imgur.com/OgdAZZ2.png',
-            fees: '5'
-        },
-        'Mannco.store': {
-            link: '',
-            imgSrc: 'https://mannco.store/statics/img/logo.svg',
-            fees: '5'
-        },
-        'Skinport': {
-            link: '',
-            imgSrc: 'https://docs.skinport.com/source/images/logo.png',
-            fees: '0'
-        },
-        'Steam': {
-            link: `https://steamcommunity.com/market/listings/${appID}/${itemName}`,
-            imgSrc: 'https://logodownload.org/wp-content/uploads/2018/01/steam-logo-2.png',
-            fees: '5'
-        },
-        'CSGOFloat': {
-            link: '',
-            imgSrc: 'https://csgofloat.com/assets/full_logo.png',
-            fees: '5'
-        },
-        'WAXPEER': {
-            link: '',
-            imgSrc: 'https://globalcsgo.com/wp-content/uploads/2021/02/waxpeer-logo-1.png',
-            fees: '5'
-        },
-        'GamerPay': {
-            link: '',
-            imgSrc: 'https://i.imgur.com/uaBBvGh.png',
-            fees: '5'
-        },
-        'Lis Skins': {
-            link: '',
-            imgSrc: 'https://csgo.steamanalyst.com/images/lisskins-logo.png',
-            fees: '5'
-        },
-        'SkinBid': {
-            link: '',
-            imgSrc: 'https://s3.eu-west-3.amazonaws.com/skinsnipe.com/img/common/logos/markets/logo-skinbid.png',
-            fees: '5'
-        },
-        'SkinBaron': {
-            link: '',
-            imgSrc: 'https://tradeplz.com/wp-content/uploads/2016/06/skinbaron-logo.png',
-            fees: '5'
-        },
-        'CS.DEALS': {
-            link: '',
-            imgSrc: 'https://cs.deals/pt/assets/media-kit/logo-horizontal-full.png',
-            fees: '5'
-        },
-        'SWAP.GG': {
-            link: '',
-            imgSrc: 'https://blog.swap.gg/content/images/2019/04/logo.png',
-            fees: '2'
-        },
-        'CS.MONEY': {
-            link: '',
-            imgSrc: 'https://assets.csgocaptain.com/cs-money.png',
-            fees: '3'
-        },
-        'BUFF Market': {
-            link: '',
-            imgSrc: 'https://i.imgur.com/Wijajmv.png',
-            fees: '2'
-        },
-        'BitSkins': {
-            link: '',
-            imgSrc: 'https://csgo-bets.org/wp-content/uploads/2021/07/bitskins.png',
-            fees: '1'
-        },
-        'CS.TRADE': {
-            link: '',
-            imgSrc: 'https://cs.trade/images/page/cstrade-logo.png',
-            fees: '2'
-        },
-        'LOOT.FARM': {
-            link: `https://loot.farm/#skin=${appID}_${itemName}`,
-            imgSrc: 'https://i.imgur.com/IQ5VVGr.png',
-            fees: '2'
-        },
-        'TF2.tm': {
-            link: '',
-            imgSrc: 'https://i.imgur.com/VMONvM3.png',
-            fees: '2'
-        },
-        /*
+  }
+
+  var gameIdMap = {
+    440: "tf2",
+    730: "csgo",
+    252490: "rust",
+    570: "dota2",
+  };
+  // Mapeamento de sites para links e imagens
+  const siteMap = {
+    "Tradeit.gg": {
+      link: "",
+      imgSrc: "https://tradeit.gg/_nuxt/img/logo_horizontal.8189732.svg",
+      fees: "5",
+    },
+    "Market CSGO": {
+      link: "",
+      imgSrc: "https://i.imgur.com/SucZNHt.png",
+      fees: "5",
+    },
+    ShadowPay: {
+      link: "",
+      imgSrc: "https://docs.shadowpay.com/images/logo.png",
+      fees: "5",
+    },
+    DMarket: {
+      link: `https://dmarket.com/ingame-items/item-list/${
+        gameIdMap[appID]
+      }-skins?title=${encodeURIComponent(itemName)}`,
+      imgSrc:
+        "https://cdn.freebiesupply.com/logos/large/2x/dmarket-logo-svg-vector.svg",
+      fees: "3",
+    },
+    Bitskins: {
+      link: "",
+      imgSrc: "https://csgo-bets.org/wp-content/uploads/2021/07/bitskins.png",
+      fees: "2",
+    },
+    BUFF163: {
+      link: "",
+      imgSrc: "https://i.imgur.com/OgdAZZ2.png",
+      fees: "5",
+    },
+    "Mannco.store": {
+      link: "",
+      imgSrc: "https://mannco.store/statics/img/logo.svg",
+      fees: "5",
+    },
+    Skinport: {
+      link: "",
+      imgSrc: "https://docs.skinport.com/source/images/logo.png",
+      fees: "0",
+    },
+    Steam: {
+      link: `https://steamcommunity.com/market/listings/${appID}/${itemName}`,
+      imgSrc:
+        "https://logodownload.org/wp-content/uploads/2018/01/steam-logo-2.png",
+      fees: "5",
+    },
+    CSGOFloat: {
+      link: "",
+      imgSrc: "https://csgofloat.com/assets/full_logo.png",
+      fees: "5",
+    },
+    WAXPEER: {
+      link: "",
+      imgSrc:
+        "https://globalcsgo.com/wp-content/uploads/2021/02/waxpeer-logo-1.png",
+      fees: "5",
+    },
+    GamerPay: {
+      link: "",
+      imgSrc: "https://i.imgur.com/uaBBvGh.png",
+      fees: "5",
+    },
+    "Lis Skins": {
+      link: "",
+      imgSrc: "https://csgo.steamanalyst.com/images/lisskins-logo.png",
+      fees: "5",
+    },
+    SkinBid: {
+      link: "",
+      imgSrc:
+        "https://s3.eu-west-3.amazonaws.com/skinsnipe.com/img/common/logos/markets/logo-skinbid.png",
+      fees: "5",
+    },
+    SkinBaron: {
+      link: "",
+      imgSrc:
+        "https://tradeplz.com/wp-content/uploads/2016/06/skinbaron-logo.png",
+      fees: "5",
+    },
+    "CS.DEALS": {
+      link: "",
+      imgSrc: "https://cs.deals/pt/assets/media-kit/logo-horizontal-full.png",
+      fees: "5",
+    },
+    "SWAP.GG": {
+      link: "",
+      imgSrc: "https://blog.swap.gg/content/images/2019/04/logo.png",
+      fees: "2",
+    },
+    "CS.MONEY": {
+      link: "",
+      imgSrc: "https://assets.csgocaptain.com/cs-money.png",
+      fees: "3",
+    },
+    "BUFF Market": {
+      link: "",
+      imgSrc: "https://i.imgur.com/Wijajmv.png",
+      fees: "2",
+    },
+    BitSkins: {
+      link: "",
+      imgSrc: "https://csgo-bets.org/wp-content/uploads/2021/07/bitskins.png",
+      fees: "1",
+    },
+    "CS.TRADE": {
+      link: "",
+      imgSrc: "https://cs.trade/images/page/cstrade-logo.png",
+      fees: "2",
+    },
+    "LOOT.FARM": {
+      link: `https://loot.farm/#skin=${appID}_${itemName}`,
+      imgSrc: "https://i.imgur.com/IQ5VVGr.png",
+      fees: "2",
+    },
+    "TF2.tm": {
+      link: "",
+      imgSrc: "https://i.imgur.com/VMONvM3.png",
+      fees: "2",
+    },
+    /*
     '': {
         link: '',
         imgSrc: '',
         fees: ''
     },
     */
-    };
-    
-    // create an array of objects with necessary information
-    const items = [
-        //{ imgSrc: '...', fees: '...', volume: '...', price: 10, link: '...' },
-    ];
-    
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //  APICALLS functions
-    //add decimal 420 -> 4.20 699 -> 6.99
-    function addDecimal(num) {
-        // Converte o número em uma string
-        let numStr = num.toString();
-    
-        // Adiciona um zero à esquerda se o número for menor do que 100
-        if (numStr.length < 3) {
-            numStr = '0' + numStr;
-        }
-    
-        // Insere um ponto duas casas à esquerda do final da string
-        let resultStr = numStr.slice(0, -2) + '.' + numStr.slice(-2);
-    
-        // Converte a string resultante de volta em um número e retorna
-        return parseFloat(resultStr);
-    }
-    //
-    
-    async function webScrapping(name, url, mode, volumeElement, priceElement) {
-      return new Promise(resolve => {
-        fetch(url)
-          .then(response => response.text())
-          .then(responseText => {
-            let parser = new DOMParser();
-            let htmlDocument = parser.parseFromString(responseText, "text/html");
-            console.log(`Requesting value for ${name}`);
-    
-            let volume = null;
-            let price = null;
-            let link = null;
-            let count = 0;
-    
-            const intervalId = setInterval(async function () {
-              if (count < 5) {
-                console.log(`${name} | waiting to load...`);
-                if (htmlDocument.querySelector(priceElement)) {
-                  console.log(`${name} | price element check pass`);
-                  switch (mode) {
-                    case 'count':
-                      volume = htmlDocument.querySelectorAll(volumeElement).length;
-                      break;
-                    case 'text':
-                      volume = volumeElement.textContent;
-                      break;
-                    case 'command':
-                      volume = volumeElement;
-                      break;
-                    case 'children':
-                      volume = volumeElement.children.length;
-                      break;
-                    default:
-                      console.log(`\n \u001b[31m ${name} | Not a valid mode, please use "count" to count how many child elements, "text" to take textContent from the element, and 'command' to use a command \n`);
-                      break;
-                  }
-                  let test = htmlDocument.querySelector(priceElement);
-    
-                  try {
-                    price = test.textContent.replaceAll('\n', '').trim();
-                  } catch (err) {
-                    console.log(`\n \u001b[31m ${name} | error with the price element in the web scraping of the site ${name} \n`);
-                  }
-                  link = url + utmSource;
-                  if (price) {
-                    console.log(`${name} - Encontrado! O item "${itemName}" custa: ${price} | volume: ${volume}`);
-                    const { imgSrc, fees } = siteMap[name];
-                    items.push({
-                      imgSrc,
-                      fees,
-                      volume,
-                      price,
-                      link
-                    });
-                    displayItems();
-                  } else {
-                    console.log("\n O item não foi encontrado na lista de resultados. \n");
-                  }
-                  clearInterval(intervalId);
-                }
-                count++;
-              } else {
-                clearInterval(intervalId);
-                console.log(`\n \u001b[31m give up in the web scraping of the site ${name} \n`);
-                console.log('url : ', url);
-                console.log('priceElem: ', priceElement);
-                console.log('volumeElem: ', volumeElement);
-              }
-            }, 10000);
-            resolve();
-          })
-          .catch(error => {
-            console.error(error);
-            resolve();
-          });
-      });
-    }
-    
-    webScrapping('Tradeit.gg', `https://tradeit.gg/${gameIdMap[appID]}/store?search=${encodeURIComponent(itemName)}&aff=SIH`, 'text', "#siteInventoryContainer .item-details .flex span", "#siteInventoryContainer .store-price-wrapper .price")
-    
+  };
 
+  // create an array of objects with necessary information
+  const items = [
+    //{ imgSrc: '...', fees: '...', volume: '...', price: 10, link: '...' },
+  ];
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //  APICALLS functions
+  //add decimal 420 -> 4.20 699 -> 6.99
+  function addDecimal(num) {
+    // Converte o número em uma string
+    let numStr = num.toString();
+
+    // Adiciona um zero à esquerda se o número for menor do que 100
+    if (numStr.length < 3) {
+      numStr = "0" + numStr;
+    }
+
+    // Insere um ponto duas casas à esquerda do final da string
+    let resultStr = numStr.slice(0, -2) + "." + numStr.slice(-2);
+
+    // Converte a string resultante de volta em um número e retorna
+    return parseFloat(resultStr);
+  }
+  //
+
+  async function webScrapping(name, url, mode, volumeElement, priceElement) {
+    return new Promise((resolve) => {
+      fetch(url)
+        .then((response) => response.text())
+        .then((responseText) => {
+          let parser = new DOMParser();
+          let htmlDocument = parser.parseFromString(responseText, "text/html");
+          console.log(`Requesting value for ${name}`);
+
+          let volume = null;
+          let price = null;
+          let link = null;
+          let count = 0;
+
+          const intervalId = setInterval(async function () {
+            if (count < 5) {
+              console.log(`${name} | waiting to load...`);
+              if (htmlDocument.querySelector(priceElement)) {
+                console.log(`${name} | price element check pass`);
+                switch (mode) {
+                  case "count":
+                    volume =
+                      htmlDocument.querySelectorAll(volumeElement).length;
+                    break;
+                  case "text":
+                    volume = volumeElement.textContent;
+                    break;
+                  case "command":
+                    volume = volumeElement;
+                    break;
+                  case "children":
+                    volume = volumeElement.children.length;
+                    break;
+                  default:
+                    console.log(
+                      `\n \u001b[31m ${name} | Not a valid mode, please use "count" to count how many child elements, "text" to take textContent from the element, and 'command' to use a command \n`
+                    );
+                    break;
+                }
+                let test = htmlDocument.querySelector(priceElement);
+
+                try {
+                  price = test.textContent.replaceAll("\n", "").trim();
+                } catch (err) {
+                  console.log(
+                    `\n \u001b[31m ${name} | error with the price element in the web scraping of the site ${name} \n`
+                  );
+                }
+                link = url + utmSource;
+                if (price) {
+                  console.log(
+                    `${name} - Encontrado! O item "${itemName}" custa: ${price} | volume: ${volume}`
+                  );
+                  const { imgSrc, fees } = siteMap[name];
+                  items.push({
+                    imgSrc,
+                    fees,
+                    volume,
+                    price,
+                    link,
+                  });
+                  displayItems();
+                } else {
+                  console.log(
+                    "\n O item não foi encontrado na lista de resultados. \n"
+                  );
+                }
+                clearInterval(intervalId);
+              }
+              count++;
+            } else {
+              clearInterval(intervalId);
+              console.log(
+                `\n \u001b[31m give up in the web scraping of the site ${name} \n`
+              );
+              console.log("url : ", url);
+              console.log("priceElem: ", priceElement);
+              console.log("volumeElem: ", volumeElement);
+            }
+          }, 10000);
+          resolve();
+        })
+        .catch((error) => {
+          console.error(error);
+          resolve();
+        });
+    });
+  }
+
+  webScrapping(
+    "Tradeit.gg",
+    `https://tradeit.gg/${gameIdMap[appID]}/store?search=${encodeURIComponent(
+      itemName
+    )}&aff=SIH`,
+    "text",
+    "#siteInventoryContainer .item-details .flex span",
+    "#siteInventoryContainer .store-price-wrapper .price"
+  );
 }
 
-itemPageEnhancerMarkets(itemPageEnhancerMarkets)
+itemPageEnhancerMarkets(itemPageEnhancerMarkets);
 /*
 const parentDiv = document.querySelector("#content > div:nth-child(4) > div > div > div.col-xl-4.col-lg-7 > div.input-group.mb-3")
 const firstItemConteiner = document.querySelector("#page-sidebar > div.card.mb-0 > div > div.item-info > ul > li:nth-child(1) > dl > dd").textContent
