@@ -1,3 +1,5 @@
+#This extension has been abandoned. The admin is strict and doesn't allow anything on his site except his own bots. Use it at your own risk.
+
 # Mannco Store Navigation Extension
 
 This project is a browser extension designed to enhance navigation on the Mannco Store website. It builds upon previously created Tampermonkey scripts, organizing them into a React-based extension using Manifest V3.
