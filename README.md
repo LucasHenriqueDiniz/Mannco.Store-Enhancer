@@ -1,4 +1,4 @@
-#This extension has been abandoned. The admin is strict and doesn't allow anything on his site except his own bots. Use it at your own risk.
+# This extension has been abandoned. The admin is strict and doesn't allow anything on his site except his own bots. Use it at your own risk.
 
 # Mannco Store Navigation Extension
 
